@@ -66,7 +66,7 @@
     if (a.proj == null || h.proj == null) return null;
     if (a.proj === h.proj) return { team: null, text: "Projected tie" };
     const fav = a.proj > h.proj ? a : h;
-    return { team: fav, text: `${fav.name} by ${Math.abs(a.proj - h.proj)}` };
+    return { team: fav, text: `${fav.name} by ${+Math.abs(a.proj - h.proj).toFixed(1)}` };
   }
 
   function card(g, i) {
