@@ -31,7 +31,7 @@ const NAV = [
       ["Biggest Improvers", "ratings/improvers.html"],
     ],
   },
-  { label: "Predictions", href: "predictions.html" },
+  { label: "Games", href: "games.html" },
   {
     label: "Conference Races",
     wide: true,

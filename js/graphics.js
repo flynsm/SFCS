@@ -2,8 +2,7 @@
    Weekly graphics.
    To post a new week: put the images in assets/graphics/<SEASON>/week-<N>/
    and add the week number to each graphic's `weeks` list below.
-   The ratings pages (week picker) and the home page "Latest" feed both
-   read from this list.
+   The ratings pages and the home page "Latest" feed show the newest week.
    Optional: run tools/make_thumbs.py to create small home-page previews.
    ========================================================================== */
 
@@ -46,9 +45,7 @@ const GRAPHICS = {
   // ---- Ratings page: <div id="graphic-page" data-graphic="power"> ----
   function renderGraphicPage(el) {
     const g = GRAPHICS[el.dataset.graphic];
-    const weeks = [...g.weeks].sort((a, b) => a - b);
-
-    if (!weeks.length) {
+    if (!g.weeks.length) {
       el.innerHTML = `
         <header class="page-head">
           <p class="eyebrow">Ratings · ${SEASON}</p>
@@ -60,12 +57,8 @@ const GRAPHICS = {
       return;
     }
 
-    const asked = Number(new URLSearchParams(location.search).get("week"));
-    const week = weeks.includes(asked) ? asked : latest(g);
+    const week = latest(g);
     const src = img(g, week);
-    const chips = weeks
-      .map((w) => `<a href="?week=${w}"${w === week ? ' aria-current="page"' : ""}>Wk ${w}</a>`)
-      .join("");
 
     el.innerHTML = `
       <header class="page-head">
@@ -73,7 +66,6 @@ const GRAPHICS = {
         <h1>Week ${week} ${g.title}</h1>
         <p class="lede">${g.blurb}</p>
       </header>
-      <nav class="week-picker" aria-label="Choose week">${chips}</nav>
       <figure class="graphic">
         <img src="${src}" alt="Week ${week} ${g.title}">
         <figcaption><a href="${src}" target="_blank" rel="noopener">Open full-size image</a></figcaption>
