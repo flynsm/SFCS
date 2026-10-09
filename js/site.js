@@ -27,16 +27,11 @@ const NAV = [
     items: [
       ["Power Ratings", "ratings/power.html"],
       ["Resume Rating", "ratings/resume.html"],
+      ["Offense / Defense Ratings", "ratings/units.html"],
       ["Biggest Improvers", "ratings/improvers.html"],
     ],
   },
-  {
-    label: "Predictions",
-    items: [
-      ["Weekly Picks", "predictions/weekly.html"],
-      ["Season Projections", "predictions/projections.html"],
-    ],
-  },
+  { label: "Predictions", href: "predictions.html" },
   {
     label: "Conference Races",
     wide: true,
