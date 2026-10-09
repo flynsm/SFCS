@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Games · SFCS</title>
+  <link rel="icon" href="assets/brand/profile.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wdth,wght@100..125,400..800&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/site.js" defer></script>
+  <script src="js/vendor/read-excel-file.min.js" defer></script>
+  <script src="js/games-data.js" defer></script>
+  <script src="js/games.js" defer></script>
+</head>
+<body>
+  <main>
+    <div class="wrap">
+      <header class="page-head">
+        <p class="eyebrow" id="games-eyebrow">Games</p>
+        <h1 id="games-title">Games</h1>
+        <p class="lede">SFCS projected scores for every FCS game, with previews and box scores.</p>
+      </header>
+
+      <div class="filters">
+        <div class="filter-group">
+          <span class="filter-label">Week</span>
+          <div class="chip-row" id="week-chips" role="group" aria-label="Week"></div>
+        </div>
+        <div class="filter-group">
+          <span class="filter-label">Conference</span>
+          <div class="chip-row" id="conf-chips" role="group" aria-label="Conference"></div>
+        </div>
+      </div>
+
+      <p class="games-summary" id="games-summary"></p>
+      <div class="games-grid" id="games-grid"></div>
+    </div>
+  </main>
+
+  <dialog class="modal" id="game-modal" aria-labelledby="game-modal-title">
+    <div class="modal-head">
+      <h2 id="game-modal-title"></h2>
+      <button class="modal-close" type="button" data-close aria-label="Close">×</button>
+    </div>
+    <div class="modal-body" id="game-modal-body"></div>
+    <div class="modal-foot"><a id="game-modal-full" href="#" target="_blank" rel="noopener">Open full-size image</a></div>
+  </dialog>
+</body>
+</html>
