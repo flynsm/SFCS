@@ -362,7 +362,6 @@ h3 { font-size: 18px; }
   color: var(--muted);
   font-size: 14px;
 }
-.games-summary strong { color: var(--ink); }
 
 .games-grid {
   display: grid;
@@ -476,8 +475,6 @@ h3 { font-size: 18px; }
   font-size: 13px;
 }
 .game-note { color: var(--muted); }
-.pick-hit { color: var(--green); font-weight: 700; margin-left: 6px; }
-.pick-miss { color: var(--red); font-weight: 700; margin-left: 6px; }
 
 .game-link {
   flex-shrink: 0;

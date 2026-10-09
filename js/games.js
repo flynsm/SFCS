@@ -75,12 +75,7 @@
 
     let foot;
     if (g.final) {
-      const actual = g.away.score > g.home.score ? g.away : g.home;
-      const hit = p?.team ? (p.team === actual ? "hit" : "miss") : null;
-      foot = `<span class="game-note">
-          Proj ${g.away.proj ?? "–"}–${g.home.proj ?? "–"}
-          ${hit ? `<span class="pick-${hit}">${hit === "hit" ? "✓ Pick correct" : "✗ Pick missed"}</span>` : ""}
-        </span>
+      foot = `<span class="game-note">Proj ${g.away.proj ?? "–"}–${g.home.proj ?? "–"}</span>
         <button class="game-link" type="button" data-i="${i}" data-kind="box">Box Score</button>`;
     } else {
       let prob = "";
@@ -164,12 +159,7 @@
       .map(([id, label]) => `<button type="button" data-conf="${id}"${id === state.conf ? ' aria-pressed="true"' : ""}>${esc(label)}</button>`)
       .join("");
 
-    // Summary: game count, plus the pick record for completed games.
-    const done = shown.filter((g) => g.final && pick(g)?.team);
-    const right = done.filter((g) => pick(g).team === (g.away.score > g.home.score ? g.away : g.home)).length;
-    el.summary.innerHTML =
-      `${shown.length} game${shown.length === 1 ? "" : "s"}` +
-      (done.length ? ` · SFCS picks <strong>${right}–${done.length - right}</strong>` : "");
+    el.summary.textContent = `${shown.length} game${shown.length === 1 ? "" : "s"}`;
 
     revealSelected(el.weeks);
     revealSelected(el.confs);
