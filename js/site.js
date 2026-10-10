@@ -4,9 +4,11 @@
    Paths are relative to the site root.
    ========================================================================== */
 
+// id = the model's conference slug (title_odds_<id>_wk<N>.png); label = as in the data.
+// races: has a title-odds image (FCS Independents doesn't).
 const CONFERENCES = [
-  ["big-sky", "Big Sky"],
-  ["caa", "Coastal Athletic"],
+  ["big_sky", "Big Sky"],
+  ["coastal_athletic", "Coastal Athletic"],
   ["ivy", "Ivy"],
   ["meac", "MEAC"],
   ["mvfc", "MVFC"],
@@ -18,8 +20,8 @@ const CONFERENCES = [
   ["southland", "Southland"],
   ["swac", "SWAC"],
   ["uac", "UAC"],
-  ["independents", "FCS Independents"],
-];
+  ["fcs_independents", "FCS Independents", false],
+].map(([id, label, races = true]) => ({ id, label, races }));
 
 const NAV = [
   {
@@ -35,7 +37,10 @@ const NAV = [
   {
     label: "Conference Races",
     wide: true,
-    items: CONFERENCES.map(([id, name]) => [name, `conferences/?c=${id}`]),
+    items: [
+      ["All Conferences", "conferences/"],
+      ...CONFERENCES.filter((c) => c.races).map((c) => [c.label, `conferences/?c=${c.id}`]),
+    ],
   },
   { label: "Box Scores", href: "box-scores.html" },
   { label: "About SFCS", href: "about.html" },

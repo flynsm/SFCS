@@ -458,12 +458,6 @@ h3 { font-size: 18px; }
   color: var(--muted);
 }
 
-.game-venue {
-  padding: 0 14px 10px 70px;
-  font-size: 12px;
-  color: var(--muted);
-}
-
 .game-foot {
   margin-top: auto;
   display: flex;
@@ -533,6 +527,25 @@ h3 { font-size: 18px; }
 .modal-body img { margin: 0 auto; }
 .modal-foot { padding: 0 16px 16px; font-size: 14px; }
 .modal-foot a { font-weight: 600; }
+
+/* ---------- Conference tiles ---------- */
+
+.conf-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+}
+.conf-tile {
+  display: block;
+  padding: 18px 16px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--gold);
+  text-decoration: none;
+  font: 400 17px/1.1 var(--font-display);
+  text-transform: uppercase;
+}
+.conf-tile:hover { background: var(--ink); color: var(--paper); }
 
 /* ---------- Placeholders / prose ---------- */
 
