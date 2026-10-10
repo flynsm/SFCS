@@ -1,43 +1,44 @@
 /* ==========================================================================
    Games page: week + conference filters, game cards, preview/box score popup.
-   Data comes from loadGames() in js/games-data.js.
+   Weeks come from data/site_latest.json; each week's games from
+   data/games_<season>_wk<N>.csv (see js/data.js).
    ========================================================================== */
 
 (function () {
-  const root = new URL("..", document.currentScript.src);
-  const url = (p) => new URL(p, root).href;
+  const D = window.SFCSData;
 
   const esc = (s) =>
     String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
-
   const norm = (s) => String(s ?? "").toLowerCase().replace(/[^a-z0-9]/g, "");
 
-  let games = [];
-  let state = { week: null, conf: "all" };
+  let latest = null;
+  let games = [];               // games of the selected week
+  const cache = {};             // week -> games
+  const state = { week: null, conf: "all" };
   let el = {};
 
   // ---------- Conferences ----------
-  // Match a spreadsheet conference ("Big Sky", "big-sky", "BIG SKY") to the nav list.
+  // Match a data conference ("Big Sky", "big_sky") to the site list.
   function confId(name) {
     const n = norm(name);
-    const hit = window.SFCS.CONFERENCES.find(([id, label]) => norm(id) === n || norm(label) === n);
-    return hit ? hit[0] : null;
+    return window.SFCS.CONFERENCES.find((c) => norm(c.id) === n || norm(c.label) === n)?.id ?? null;
   }
 
   // ---------- Formatting ----------
   const fmtDate = (d) =>
     d ? d.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" }) : "";
+  const whole = (v) => (v == null ? "–" : Math.round(v));
 
   function initials(name) {
-    const words = name.replace(/[.'’]/g, "").split(/[\s-]+/).filter(Boolean);
+    const words = name.replace(/[.'’()]/g, "").split(/[\s&-]+/).filter(Boolean);
     return (words.length === 1 ? words[0].slice(0, 3) : words.map((w) => w[0]).join("").slice(0, 3)).toUpperCase();
   }
 
   function logo(team) {
-    // Monogram shows until/unless assets/logos/<slug>.png loads.
+    // Initials show until/unless assets/logos/<slug>.png loads (non-D1 teams have none).
     return `<span class="team-logo">
         <span class="team-mono" aria-hidden="true">${esc(initials(team.name))}</span>
-        <img src="${url(`assets/logos/${team.slug}.png`)}" alt="" loading="lazy"
+        <img src="${D.logo(team.name)}" alt="" loading="lazy"
              onload="this.previousElementSibling.remove()" onerror="this.remove()">
       </span>`;
   }
@@ -46,7 +47,6 @@
   function teamRow(g, side) {
     const t = g[side];
     const other = g[side === "away" ? "home" : "away"];
-    const score = g.final ? t.score : t.proj;
     const won = g.final && t.score > other.score;
     const lost = g.final && t.score < other.score;
     const sub = [t.record, t.conf].filter(Boolean).map(esc).join(" · ");
@@ -56,35 +56,36 @@
           <span>${esc(t.name)}</span>
           ${sub ? `<small>${sub}</small>` : ""}
         </div>
-        <div class="team-score">${score ?? "–"}</div>
+        <div class="team-score">${g.final ? t.score : whole(t.proj)}</div>
       </div>`;
   }
 
-  // Projected winner + margin, e.g. "Montana St. by 9".
-  function pick(g) {
+  const hasProj = (g) => g.away.proj != null && g.home.proj != null;
+
+  // Projected winner + margin, e.g. "Montana St. by 9.2 · 76%".
+  function projText(g) {
+    if (!hasProj(g)) return "No projection";
     const { away: a, home: h } = g;
-    if (a.proj == null || h.proj == null) return null;
-    if (a.proj === h.proj) return { team: null, text: "Projected tie" };
-    const fav = a.proj > h.proj ? a : h;
-    return { team: fav, text: `${fav.name} by ${+Math.abs(a.proj - h.proj).toFixed(1)}` };
+    const margin = Math.abs(h.proj - a.proj);
+    if (margin < 0.05) return "Projected even";
+    const fav = h.proj > a.proj ? h : a;
+    let text = `${esc(fav.name)} by ${margin.toFixed(1)}`;
+    if (g.homeWinProb != null) {
+      const p = fav === h ? g.homeWinProb : 1 - g.homeWinProb;
+      text += ` · ${Math.round(p * 100)}%`;
+    }
+    return text;
   }
 
   function card(g, i) {
-    const p = pick(g);
-    const meta = [fmtDate(g.date), g.time, g.tv].filter(Boolean).map(esc).join(" · ");
-
-    let foot;
+    const meta = [fmtDate(g.date), g.time].filter(Boolean).map(esc).join(" · ");
+    let note, link = "";
     if (g.final) {
-      foot = `<span class="game-note">Proj ${g.away.proj ?? "–"}–${g.home.proj ?? "–"}</span>
-        <button class="game-link" type="button" data-i="${i}" data-kind="box">Box Score</button>`;
+      note = hasProj(g) ? `Proj ${whole(g.away.proj)}–${whole(g.home.proj)}` : "";
+      if (g.hasBoxScore) link = `<button class="game-link" type="button" data-i="${i}" data-kind="box">Box Score</button>`;
     } else {
-      let prob = "";
-      if (g.homeWinProb != null && p?.team) {
-        const pr = p.team === g.home ? g.homeWinProb : 1 - g.homeWinProb;
-        prob = ` · ${Math.round(pr * 100)}%`;
-      }
-      foot = `<span class="game-note">${p ? esc(p.text) + prob : ""}</span>
-        <button class="game-link" type="button" data-i="${i}" data-kind="preview">Preview</button>`;
+      note = projText(g);
+      if (g.hasPreview) link = `<button class="game-link" type="button" data-i="${i}" data-kind="preview">Preview</button>`;
     }
 
     return `<article class="game-card${g.final ? " is-final" : ""}">
@@ -94,40 +95,14 @@
         </header>
         <div class="game-teams">
           ${teamRow(g, "away")}
-          <div class="game-at">${g.neutral ? "vs" : "at"}</div>
+          <div class="game-at">${g.neutral ? "vs (neutral site)" : "at"}</div>
           ${teamRow(g, "home")}
         </div>
-        ${g.location ? `<div class="game-venue">${esc(g.location)}${g.neutral ? " (neutral)" : ""}</div>` : ""}
-        <footer class="game-foot">${foot}</footer>
+        <footer class="game-foot"><span class="game-note">${note}</span>${link}</footer>
       </article>`;
   }
 
-  // "7:00 PM" -> minutes after midnight, for sorting; unknown times sort last.
-  function kickoff(g) {
-    const m = /^(\d{1,2}):(\d{2})\s*([ap])/i.exec(g.time);
-    if (!m) return 24 * 60;
-    return ((Number(m[1]) % 12) + (/p/i.test(m[3]) ? 12 : 0)) * 60 + Number(m[2]);
-  }
-
-  // Keep the selected chip visible when a row scrolls sideways (phones).
-  function revealSelected(row) {
-    const b = row.querySelector('[aria-pressed="true"]');
-    if (b && (b.offsetLeft + b.offsetWidth > row.scrollLeft + row.clientWidth || b.offsetLeft < row.scrollLeft)) {
-      row.scrollLeft = b.offsetLeft - row.offsetLeft - 16;
-    }
-  }
-
   // ---------- Page ----------
-  function weeks() {
-    return [...new Set(games.map((g) => g.week))].sort((a, b) => a - b);
-  }
-
-  // Current week = first week that still has unplayed games (else the last week).
-  function currentWeek() {
-    const ws = weeks();
-    return ws.find((w) => games.some((g) => g.week === w && !g.final)) ?? ws[ws.length - 1];
-  }
-
   function syncUrl() {
     const q = new URLSearchParams();
     q.set("week", state.week);
@@ -135,43 +110,63 @@
     history.replaceState(null, "", `?${q}`);
   }
 
-  function render() {
-    const inWeek = games.filter((g) => g.week === state.week);
-    const shown =
-      state.conf === "all"
-        ? inWeek
-        : inWeek.filter((g) => confId(g.away.conf) === state.conf || confId(g.home.conf) === state.conf);
-    shown.sort((a, b) => (a.date ?? 0) - (b.date ?? 0) || kickoff(a) - kickoff(b));
-
-    const isCurrent = state.week === currentWeek() && inWeek.some((g) => !g.final);
-    el.eyebrow.textContent = `${GAMES_SEASON} Season · Week ${state.week}${isCurrent ? " · This week" : ""}`;
-    el.title.textContent = `Week ${state.week} Games`;
-    document.title = `Week ${state.week} Games · SFCS`;
-
-    el.weeks.innerHTML = weeks()
+  function renderChips() {
+    el.weeks.innerHTML = latest.games_weeks
       .map((w) => `<button type="button" data-week="${w}"${w === state.week ? ' aria-pressed="true"' : ""}>Wk ${w}</button>`)
       .join("");
 
-    // Only list conferences that appear in the data, in nav order.
+    // Conferences that appear this week, in site order.
     const present = new Set(games.flatMap((g) => [confId(g.away.conf), confId(g.home.conf)]));
-    const confs = window.SFCS.CONFERENCES.filter(([id]) => present.has(id));
-    el.confs.innerHTML = [["all", "All"], ...confs]
-      .map(([id, label]) => `<button type="button" data-conf="${id}"${id === state.conf ? ' aria-pressed="true"' : ""}>${esc(label)}</button>`)
+    const confs = window.SFCS.CONFERENCES.filter((c) => present.has(c.id));
+    el.confs.innerHTML = [{ id: "all", label: "All" }, ...confs]
+      .map((c) => `<button type="button" data-conf="${c.id}"${c.id === state.conf ? ' aria-pressed="true"' : ""}>${esc(c.label)}</button>`)
       .join("");
 
+    for (const row of [el.weeks, el.confs]) {
+      const b = row.querySelector('[aria-pressed="true"]');
+      if (b && (b.offsetLeft + b.offsetWidth > row.scrollLeft + row.clientWidth || b.offsetLeft < row.scrollLeft)) {
+        row.scrollLeft = b.offsetLeft - row.offsetLeft - 16;
+      }
+    }
+  }
+
+  function render() {
+    const label = state.week === latest.week ? " · This week" : state.week === latest.played_week ? " · Last week" : "";
+    el.eyebrow.textContent = `${latest.season} Season · Week ${state.week}${label}`;
+    el.title.textContent = `Week ${state.week} Games`;
+    document.title = `Week ${state.week} Games · SFCS`;
+    renderChips();
+
+    const shown = (state.conf === "all"
+      ? games
+      : games.filter((g) => confId(g.away.conf) === state.conf || confId(g.home.conf) === state.conf)
+    ).sort((a, b) => (a.date ?? 0) - (b.date ?? 0) || a.minutes - b.minutes);
+
     el.summary.textContent = `${shown.length} game${shown.length === 1 ? "" : "s"}`;
-
-    revealSelected(el.weeks);
-    revealSelected(el.confs);
-
     el.grid.innerHTML = shown.length
       ? shown.map((g) => card(g, games.indexOf(g))).join("")
       : `<div class="placeholder"><strong>No games</strong>Nothing scheduled for this filter.</div>`;
   }
 
+  async function loadWeek(w) {
+    el.grid.setAttribute("aria-busy", "true");
+    try {
+      games = cache[w] ??= await D.games(latest.season, w);
+    } catch (err) {
+      console.error(err);
+      games = [];
+    }
+    el.grid.removeAttribute("aria-busy");
+    // Keep the conference filter only if that conference plays this week.
+    if (state.conf !== "all" && !games.some((g) => [confId(g.away.conf), confId(g.home.conf)].includes(state.conf))) {
+      state.conf = "all";
+    }
+    render();
+  }
+
   // ---------- Popup ----------
   function openModal(g, kind) {
-    const src = url(kind === "box" ? g.boxScoreImage : g.previewImage);
+    const src = kind === "box" ? D.boxScore(g.id, g.week) : D.preview(g.id, g.week);
     const label = kind === "box" ? "Box Score" : "Game Preview";
     el.modalTitle.textContent = `${g.away.name} ${g.neutral ? "vs" : "at"} ${g.home.name} · ${label}`;
     el.modalBody.innerHTML = `<img src="${src}" alt="${esc(label)}: ${esc(g.away.name)} at ${esc(g.home.name)}">`;
@@ -192,30 +187,27 @@
       modalTitle: $("game-modal-title"), modalBody: $("game-modal-body"), modalFull: $("game-modal-full"),
     };
 
-    try {
-      games = await loadGames(root);
-    } catch (err) {
-      console.error(err);
-      el.grid.innerHTML = `<div class="placeholder"><strong>Couldn't load games</strong>${esc(err.message)}</div>`;
-      return;
-    }
-    if (!games.length) {
-      el.grid.innerHTML = `<div class="placeholder"><strong>Coming soon</strong>No games posted yet.</div>`;
+    latest = await D.latest();
+    if (!latest?.games_weeks?.length) {
+      el.grid.innerHTML = `<div class="placeholder"><strong>Coming soon</strong>Game projections will appear here after the next weekly update.</div>`;
+      document.querySelector(".filters").hidden = true;
       return;
     }
 
     const q = new URLSearchParams(location.search);
     const askedWeek = Number(q.get("week"));
-    state.week = weeks().includes(askedWeek) ? askedWeek : currentWeek();
-    state.conf = window.SFCS.CONFERENCES.some(([id]) => id === q.get("conf")) ? q.get("conf") : "all";
-    render();
+    state.week = latest.games_weeks.includes(askedWeek)
+      ? askedWeek
+      : latest.games_weeks.includes(latest.week) ? latest.week : latest.games_weeks.at(-1);
+    state.conf = window.SFCS.CONFERENCES.some((c) => c.id === q.get("conf")) ? q.get("conf") : "all";
+    await loadWeek(state.week);
 
     el.weeks.addEventListener("click", (e) => {
       const b = e.target.closest("button[data-week]");
       if (!b) return;
       state.week = Number(b.dataset.week);
       syncUrl();
-      render();
+      loadWeek(state.week);
     });
     el.confs.addEventListener("click", (e) => {
       const b = e.target.closest("button[data-conf]");
