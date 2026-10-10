@@ -85,8 +85,10 @@ window.SFCSData = (function () {
       id: r.contest_id,
       week: num(r.week),
       date: y ? new Date(y, mo - 1, da) : null,
-      minutes: isNaN(hh) ? 24 * 60 : hh * 60 + mm,
-      time: isNaN(hh) ? "" : `${hh % 12 || 12}:${String(mm).padStart(2, "0")} ${hh < 12 ? "AM" : "PM"} ET`,
+      // 00:00 ET means the kickoff time hasn't been announced (sorts last that day).
+      minutes: isNaN(hh) || (hh === 0 && mm === 0) ? 24 * 60 : hh * 60 + mm,
+      time: isNaN(hh) ? "" : hh === 0 && mm === 0 ? "Time TBA"
+        : `${hh % 12 || 12}:${String(mm).padStart(2, "0")} ${hh < 12 ? "AM" : "PM"} ET`,
       neutral: r.neutral === "1",
       away: side("away"),
       home: side("home"),

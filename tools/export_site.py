@@ -43,6 +43,7 @@ import pandas as pd
 # ---------------------------------------------------------------------------
 
 SEASON = 2026
+SCRIPT_VERSION = "2026-10-10.2"   # printed on every run; compare with the repo copy
 
 ROOT = Path(__file__).resolve().parent.parent          # fcs-model/
 DASHBOARDS = ROOT / "dashboards"
@@ -132,7 +133,12 @@ def box_score_name(cid: str, week: int) -> str:
 
 def load_schedule() -> pd.DataFrame:
     df = pd.read_parquet(SCHEDULE)
-    df = df[df["matchup"].isin(FCS_MATCHUPS)].copy()
+    df = df[df["matchup"].isin(FCS_MATCHUPS)]
+    # Regular season only for now: postseason week numbering isn't known yet and
+    # could collide with regular-season weeks. Revisit when playoff games appear.
+    if "season_type" in df.columns:
+        df = df[df["season_type"].fillna("regular") == "regular"]
+    df = df.copy()
     df["contest_id"] = df["contest_id"].astype(str)
     df["week"] = df["week"].astype(int)
     df["kickoff"] = pd.to_datetime(df["game_date"], utc=True)
@@ -280,7 +286,7 @@ def detect_week() -> int:
 
 def export(week: int, placeholders: bool):
     played = week - 1
-    print(f"SFCS site export: upcoming week {week}, played week {played}"
+    print(f"SFCS site export v{SCRIPT_VERSION}: upcoming week {week}, played week {played}"
           + ("  [PLACEHOLDER TEST]" if placeholders else ""))
 
     # Fresh upload folder (only ever the script's own folder).
@@ -313,7 +319,7 @@ def export(week: int, placeholders: bool):
     schedule = load_schedule()
     store = update_projection_store()
     records = records_before(schedule)
-    first_week = int(store["week"].min())
+    first_week = int(store.loc[store["contest_id"].isin(schedule["contest_id"]), "week"].min())
     games_weeks = [w for w in range(first_week, week + 1) if (schedule["week"] == w).any()]
 
     PUBLISHED.mkdir(parents=True, exist_ok=True)
@@ -431,6 +437,7 @@ def main():
         export_logos()
     elif a.snapshot:
         store = update_projection_store()
+        print(f"export_site.py v{SCRIPT_VERSION}")
         print(f"Saved projections: {len(store)} games in {PROJ_STORE}")
     else:
         export(a.week or detect_week(), a.placeholders)
