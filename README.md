@@ -38,7 +38,7 @@ The ratings pages default to the newest week, and the home page shows the newest
 
 ## Games spreadsheet
 
-Full data spec for the analytics pipeline: [`docs/SITE_INTEGRATION.md`](docs/SITE_INTEGRATION.md).
+Integration brief for the analytics pipeline (in progress): [`docs/SITE_INTEGRATION.md`](docs/SITE_INTEGRATION.md).
 
 `data/games-2026.xlsx`, first sheet, one row per game, headers in row 1.
 **The current file is sample data**: overwrite it with your own.
