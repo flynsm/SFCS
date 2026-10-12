@@ -16,8 +16,8 @@ Output (the path the website already reads):
 
 All stat values and their color percentiles come from the analytics pipeline
 through ONE input table (STATS_INPUT below). This script does not compute,
-derive or check any statistic. Any value it isn't given is drawn as a hatched
-"SOURCE TBD" placeholder (label greyed), and the image carries a DRAFT banner.
+derive or check any statistic. A value it isn't given is drawn as a plain "–"
+(the console reports which games had missing values).
 """
 
 from __future__ import annotations
@@ -48,7 +48,7 @@ TEAM_BRAND = ROOT / "processed" / "team_brand.parquet"             # logos
 #   and for every row key in ROWS below:
 #     <key>       the value to print (rates as 0-1, e.g. 0.412 prints as 41.2%)
 #     <key>_pct   0-100 color position, 100 = best for that team (blank = unshaded)
-# Missing file, column or cell -> drawn as SOURCE TBD.
+# Missing file, column or cell -> drawn as "–" (and reported in the console).
 STATS_INPUT = None   # PLACEHOLDER: e.g. DASHBOARDS / "week{week}_db" / "box_score_stats_wk{week}.parquet"
 
 IMAGE_MATCHUPS = {"FCS-FCS", "FBS-FCS"}   # games that get an image (user decision)
@@ -76,11 +76,9 @@ INK, PAPER, CARD, ROW_ALT = "#161616", "#f4f2ed", "#fbfaf7", "#f0ede6"
 GOLD, MUTED, LINE = "#c9a961", "#6b6760", "#d6d1c4"
 BAD, MID, GOOD = (205, 92, 70), (251, 250, 247), (46, 125, 79)   # red - neutral - green
 
-# Footer text. PLACEHOLDER wording: confirm with the analytics side.
-FOOTNOTES = [
-    "Color: rank vs. every D1-vs-D1 single-game performance this season.",
-    "Garbage-time plays excluded.",
-]
+# Footer text (wording from the user).
+FOOTNOTE = ("Garbage time excluded. Shading indicates performance as percentile "
+            "relative to all D1 football games since 2023.")
 
 # ===========================================================================
 # Rows (the user's list; the final score sits in the header)
@@ -159,75 +157,93 @@ def logo_image(team: str, size: int):
     return im
 
 
-def render(game: dict, values: dict, colors: dict, out: Path, banner: str | None):
+def _fit(text: str, candidates, size: int, max_w: float, min_size: int):
+    """Largest font (size down to min_size) at which text fits in max_w."""
+    for sz in range(size, min_size - 1, -1):
+        f = _font(candidates, sz)
+        if f.getlength(text) <= max_w:
+            return f
+    return _font(candidates, min_size)
+
+
+def _wrap(text: str, font, max_w: float) -> list[str]:
+    lines = [""]
+    for w in text.split():
+        trial = f"{lines[-1]} {w}".strip()
+        if font.getlength(trial) <= max_w or not lines[-1]:
+            lines[-1] = trial
+        else:
+            lines.append(w)
+    return lines
+
+
+def render(game: dict, values: dict, colors: dict, out: Path):
     """game: week, date_text, away, home, neutral, away_score, home_score
-    values / colors: {"away"|"home": {row key: value / 0-100 color position}}"""
+    values / colors: {"away"|"home": {row key: value / 0-100 color position}}
+    Sized for phones: 1080 wide, about 9:16."""
     from PIL import Image, ImageDraw
 
-    W, M = 1500, 60
-    COL = 340                              # team value columns
-    ROW_H = 92
-    head_h, team_h = 270, 250
-    foot_h = 170 + (80 if banner else 0)
+    W, M = 1080, 36
+    COL = 270                               # team value columns
+    ROW_H = 106
+    head_h, team_h = 168, 236
+    F = _font
+
+    reg = _font(FONTS_REGULAR, 23)
+    foot_lines = _wrap(FOOTNOTE, reg, W - 2 * M)
+    foot_h = 40 + 32 * len(foot_lines) + 26
     H = head_h + team_h + ROW_H * len(ROWS) + foot_h
     im = Image.new("RGB", (W, H), PAPER)
     d = ImageDraw.Draw(im)
-    F = _font
 
-    # Title block (house style: mark left, heavy title, gold rule)
+    # Compact title block: small mark left, title + matchup line, gold rule
     if MARK.exists():
         mk = Image.open(MARK).convert("RGBA")
-        mk.thumbnail((150, 150), Image.LANCZOS)
-        im.paste(mk, (M, 50), mk)
+        mk.thumbnail((96, 96), Image.LANCZOS)
+        im.paste(mk, (M, 34), mk)
     at = "VS" if game["neutral"] else "AT"
-    d.text((W / 2 + 60, 105), f"WEEK {game['week']} BOX SCORE", font=F(FONTS_HEAVY, 76), fill=INK, anchor="mm")
+    tx = M + 120                             # text starts right of the mark
+    d.text((tx, 62), f"WEEK {game['week']} BOX SCORE", font=F(FONTS_HEAVY, 52), fill=INK, anchor="lm")
     sub = f"{game['away'].upper()} {at} {game['home'].upper()} · {game['date_text']}"
     if game["neutral"]:
         sub += " · NEUTRAL SITE"
-    d.text((W / 2 + 60, 180), sub, font=F(FONTS_BOLD, 30), fill=MUTED, anchor="mm")
-    d.rectangle((M, 238, W - M, 242), fill=GOLD)
+    d.text((tx, 112), sub, font=_fit(sub, FONTS_BOLD, 24, W - M - tx, 16), fill=MUTED, anchor="lm")
+    d.rectangle((M, 148, W - M, 151), fill=GOLD)
 
-    # Team header: logo + name, final score beside it, AT/VS centered
+    # Team header: logo + name in each value column, score beside it, AT/VS centered
     xl, xr = M, W - M - COL
     xc0, xc1 = M + COL, W - M - COL
     cx = (xc0 + xc1) / 2
     y = head_h
     a, h = game["away_score"], game["home_score"]
-    for side, x, sx in (("away", xl, xc0 + 120), ("home", xr, xc1 - 120)):
-        lg = logo_image(game[side], 140)
-        im.paste(lg, (int(x + COL / 2 - lg.width / 2), y + 12), lg)
-        d.text((x + COL / 2, y + 190), game[side].upper(), font=F(FONTS_HEAVY, 30), fill=INK, anchor="mm")
+    for side, x, sx in (("away", xl, xc0 + 85), ("home", xr, xc1 - 85)):
+        lg = logo_image(game[side], 120)
+        im.paste(lg, (int(x + COL / 2 - lg.width / 2), y + 18), lg)
+        name = game[side].upper()
+        d.text((x + COL / 2, y + 178), name, font=_fit(name, FONTS_HEAVY, 28, COL - 16, 18), fill=INK, anchor="mm")
         mine, theirs = (a, h) if side == "away" else (h, a)
-        d.text((sx, y + 95), str(int(mine)), font=F(FONTS_HEAVY, 110),
+        d.text((sx, y + 92), str(int(mine)), font=F(FONTS_HEAVY, 100),
                fill=INK if mine >= theirs else "#a39e94", anchor="mm")
-    d.text((cx, y + 95), at, font=F(FONTS_HEAVY, 40), fill=GOLD, anchor="mm")
-    d.text((cx, y + 190), "FINAL", font=F(FONTS_BOLD, 22), fill=MUTED, anchor="mm")
+    d.text((cx, y + 92), at, font=F(FONTS_HEAVY, 34), fill=GOLD, anchor="mm")
     y += team_h
 
     # Rows
     d.rectangle((M, y - 5, W - M, y), fill=INK)
+    label_w = xc1 - xc0 - 28
     for i, row in enumerate(ROWS):
         y0, y1 = y + i * ROW_H, y + (i + 1) * ROW_H
         bg = CARD if i % 2 == 0 else ROW_ALT
-        tbd = any(_missing(values[s].get(row.key)) for s in ("away", "home"))
         d.rectangle((xc0, y0, xc1, y1), fill=bg)
-        d.text((cx, (y0 + y1) / 2), row.label,
-               font=F(FONTS_HEAVY, 31), fill="#9a958b" if tbd else INK, anchor="mm")
+        lf = _fit(row.label, FONTS_HEAVY, 30, label_w, 25)
+        lines = _wrap(row.label, lf, label_w)
+        for n, line in enumerate(lines):                 # one line, or two for long labels
+            d.text((cx, (y0 + y1) / 2 + (n - (len(lines) - 1) / 2) * 36), line, font=lf, fill=INK, anchor="mm")
 
         for side, x in (("away", xl), ("home", xr)):
             v, c = values[side].get(row.key), colors[side].get(row.key)
-            if _missing(v):
-                cell = Image.new("RGB", (COL, ROW_H), "#ebe8e1")     # hatch, clipped to the cell
-                cd = ImageDraw.Draw(cell)
-                for k in range(-ROW_H, COL, 18):
-                    cd.line((k, ROW_H, k + ROW_H, 0), fill="#ddd9cf", width=3)
-                im.paste(cell, (x, y0))
-                d.text((x + COL / 2, (y0 + y1) / 2), "SOURCE TBD", font=F(FONTS_BOLD, 21),
-                       fill="#9a958b", anchor="mm")
-                continue
-            shaded = not _missing(c)
+            shaded = not _missing(v) and not _missing(c)
             d.rectangle((x, y0, x + COL, y1), fill=shade(c) if shaded else bg)
-            d.text((x + COL / 2, (y0 + y1) / 2), fmt(row, v), font=F(FONTS_HEAVY, 46),
+            d.text((x + COL / 2, (y0 + y1) / 2), "–" if _missing(v) else fmt(row, v), font=F(FONTS_HEAVY, 50),
                    fill="#ffffff" if shaded and abs(c - 50) > 36 else INK, anchor="mm")
         d.line((M, y1, W - M, y1), fill=LINE, width=2)
     rows_bottom = y + ROW_H * len(ROWS)
@@ -235,19 +251,10 @@ def render(game: dict, values: dict, colors: dict, out: Path, banner: str | None
     d.line((xc1, y, xc1, rows_bottom), fill=LINE, width=2)
     d.rectangle((M, rows_bottom, W - M, rows_bottom + 5), fill=INK)
 
-    # Footer: color key + footnotes
-    y = rows_bottom + 45
-    kx0, kx1 = M, M + 420
-    for k in range(kx1 - kx0):
-        d.line((kx0 + k, y, kx0 + k, y + 22), fill=shade(100 * k / (kx1 - kx0)))
-    d.text((kx0, y + 34), "WORSE", font=F(FONTS_BOLD, 17), fill=MUTED, anchor="la")
-    d.text((kx1, y + 34), "BETTER", font=F(FONTS_BOLD, 17), fill=MUTED, anchor="ra")
-    for n, line in enumerate(FOOTNOTES):
-        d.text((kx1 + 30, y - 2 + 30 * n), line, font=F(FONTS_REGULAR, 21), fill=MUTED, anchor="la")
-    if banner:
-        y += 95
-        d.rectangle((M, y, W - M, y + 56), fill="#fff4d6", outline=GOLD, width=3)
-        d.text((W / 2, y + 28), banner, font=F(FONTS_BOLD, 20), fill="#7a5c12", anchor="mm")
+    # Footnote
+    y = rows_bottom + 40
+    for n, line in enumerate(foot_lines):
+        d.text((M, y + 32 * n), line, font=reg, fill=MUTED, anchor="lm")
 
     out.parent.mkdir(parents=True, exist_ok=True)
     im.save(out, optimize=True)
@@ -297,20 +304,18 @@ def build_week(week: int, only_game: str | None = None):
             get = lambda col: (None if r is None or col not in r.index or pd.isna(r[col]) else float(r[col]))
             values[side] = {row.key: get(row.key) for row in ROWS}
             colors[side] = {row.key: get(f"{row.key}_pct") for row in ROWS}
-        tbd = sum(_missing(v) for s in values for v in values[s].values())
-        banner = "DRAFT · cells marked SOURCE TBD have no stat source connected yet (see STATS_INPUT)" if tbd else None
-        incomplete += bool(tbd)
+        incomplete += any(_missing(v) for s in values for v in values[s].values())
         info = dict(week=week, away=g.away_team, home=g.home_team, neutral=bool(g.neutral),
                     away_score=g.away_score, home_score=g.home_score, date_text=_date_text(pd.to_datetime(g.game_date, utc=True)))
         out = DASHBOARDS / f"week{week}_db" / "box_scores" / f"box_score_{g.contest_id}_wk{week}.png"
-        render(info, values, colors, out, banner)
+        render(info, values, colors, out)
         made += 1
     print(f"Wrote {made} box score(s) to {DASHBOARDS / f'week{week}_db' / 'box_scores'}"
-          + (f"  ({incomplete} with SOURCE TBD placeholders)" if incomplete else ""))
+          + (f"  ({incomplete} with missing values, drawn as '–'; check STATS_INPUT)" if incomplete else ""))
 
 
 def demo(out: Path, neutral: bool = False, placeholders: bool = False):
-    """Design preview. Made-up values and color positions; nothing is computed."""
+    """Layout preview with made-up values and color positions (design review only)."""
     import random
     rnd = random.Random(7)
     values, colors = {"away": {}, "home": {}}, {"away": {}, "home": {}}
@@ -323,8 +328,7 @@ def demo(out: Path, neutral: bool = False, placeholders: bool = False):
             colors[side][row.key] = rnd.uniform(1, 99)
     info = dict(week=6, away="Montana", home="Montana St.", neutral=neutral, away_score=27, home_score=21,
                 date_text="SAT, OCT 10")
-    render(info, values, colors, out,
-           "DRAFT · cells marked SOURCE TBD have no stat source connected yet" if placeholders else "DEMO · made-up numbers for design review")
+    render(info, values, colors, out)
     print(f"Wrote demo to {out}")
 
 
@@ -334,7 +338,7 @@ def main():
     ap.add_argument("--game", help="one contest_id only")
     ap.add_argument("--demo", action="store_true", help="design preview with made-up numbers")
     ap.add_argument("--neutral", action="store_true", help="--demo: neutral-site game")
-    ap.add_argument("--placeholders", action="store_true", help="--demo: show every stat as SOURCE TBD")
+    ap.add_argument("--placeholders", action="store_true", help="--demo: no values (the empty state)")
     ap.add_argument("--out", default="box_score_demo.png", help="--demo output file")
     a = ap.parse_args()
     if a.demo:
