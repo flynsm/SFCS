@@ -10,7 +10,7 @@ in SFCS house style. Preview: [`box_score_demo.png`](box_score_demo.png).
 - **Size:** 1080 × ~1910 px (about 9:16), so it fits a phone screen.
 - **Header:** a compact SFCS mark and "WEEK N ADVANCED BOX SCORE", then the logos with the final score beside each one.
   Between the scores: "AT" (or "VS" at neutral sites) and the game date (plus "NEUTRAL SITE" when it applies).
-- **Credit:** "@SFCSratings" at the end of the footnote (`HANDLE`), plus a faint SF|CS watermark behind the stat-name
+- **Credit:** "@SFCSratings" as the last words of the footnote, in the same style (`HANDLE`), plus a faint SF|CS watermark behind the stat-name
   column (`WATERMARK_OPACITY`, 4%) that can't be cropped off without cutting the table. The teams, score, date and neutral flag come from `games_schedule_current.parquet`;
   logos come from `team_brand.parquet`.
 - **Rows** (the user's list): PGWE, EPA/play, yards/play, passing SR, rushing SR, explosive play rate, early down SR,
@@ -49,7 +49,7 @@ def_stuff_rate, havoc_rate, quality_drive_rate, pts_per_quality_drive, garbage_s
   The fallback is Arial Black / Arial.
 - **SFCS mark:** `MARK`, the dark-on-light SFCS mark file.
 - **Footnote** (`FOOTNOTE`, the user's wording): "Garbage time excluded. Shading indicates performance as percentile relative
-  to all D1 football games since 2023." 
+  to all D1 football games since 2023. @SFCSratings"
 - **Row labels and number formats** are in `ROWS` if anything should read differently.
 
 ## Try it

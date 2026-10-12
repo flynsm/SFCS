@@ -76,13 +76,13 @@ INK, PAPER, CARD, ROW_ALT = "#161616", "#f4f2ed", "#fbfaf7", "#f0ede6"
 GOLD, MUTED, LINE = "#c9a961", "#6b6760", "#d6d1c4"
 BAD, MID, GOOD = (205, 92, 70), (251, 250, 247), (46, 125, 79)   # red - neutral - green
 
-# Credit, drawn at the end of the footnote.
+# Credit, written into the footnote.
 HANDLE = "@SFCSratings"
 WATERMARK_OPACITY = 0.04   # SF|CS mark behind the stat-name column
 
 # Footer text (wording from the user).
 FOOTNOTE = ("Garbage time excluded. Shading indicates performance as percentile "
-            "relative to all D1 football games since 2023.")
+            f"relative to all D1 football games since 2023. {HANDLE}")
 
 # ===========================================================================
 # Rows (the user's list; the final score sits in the header)
@@ -194,11 +194,9 @@ def render(game: dict, values: dict, colors: dict, out: Path):
     head_h, team_h = 150, 236
     F = _font
 
-    reg, bold = _font(FONTS_REGULAR, 23), _font(FONTS_BOLD, 23)
+    reg = _font(FONTS_REGULAR, 23)
     foot_lines = _wrap(FOOTNOTE, reg, W - 2 * M)
-    handle_w = bold.getlength(HANDLE)
-    handle_own_line = reg.getlength(foot_lines[-1]) + 30 + handle_w > W - 2 * M
-    foot_h = 40 + 32 * (len(foot_lines) + handle_own_line) + 26
+    foot_h = 40 + 32 * len(foot_lines) + 26
     H = head_h + team_h + ROW_H * len(ROWS) + foot_h
     im = Image.new("RGB", (W, H), PAPER)
     d = ImageDraw.Draw(im)
@@ -267,12 +265,10 @@ def render(game: dict, values: dict, colors: dict, out: Path):
     d.line((xc1, y, xc1, rows_bottom), fill=LINE, width=2)
     d.rectangle((M, rows_bottom, W - M, rows_bottom + 5), fill=INK)
 
-    # Footnote + credit (credit right-aligned on the last line, or its own line if it doesn't fit)
+    # Footnote (includes the credit)
     y = rows_bottom + 40
     for n, line in enumerate(foot_lines):
         d.text((M, y + 32 * n), line, font=reg, fill=MUTED, anchor="lm")
-    hy = y + 32 * (len(foot_lines) - 1 + handle_own_line)
-    d.text((W - M, hy), HANDLE, font=bold, fill=INK, anchor="rm")
 
     out.parent.mkdir(parents=True, exist_ok=True)
     im.save(out, optimize=True)
