@@ -40,7 +40,7 @@ def_stuff_rate, havoc_rate, quality_drive_rate, pts_per_quality_drive, garbage_s
   or placeholder marking; the console lists which games had missing values.
 - **Your side owns:** all stat definitions, the percentile baseline, PGWE for both teams, garbage-time handling,
   and the EP-dependent rows.
-- **Baseline (user decision):** percentiles are relative to **all D1 football games since 2023**. Build the distribution
+- **Baseline (user decision):** percentiles are relative to **D1 football games 2023-25**. Build the distribution
   from the **past 3 seasons** of single-game team performances. The footnote on the image says exactly this.
 
 ## Other placeholders to confirm
@@ -49,7 +49,7 @@ def_stuff_rate, havoc_rate, quality_drive_rate, pts_per_quality_drive, garbage_s
   The fallback is Arial Black / Arial.
 - **SFCS mark:** `MARK`, the dark-on-light SFCS mark file.
 - **Footnote** (`FOOTNOTE`, the user's wording): "Garbage time excluded. Shading indicates performance as percentile relative
-  to all D1 football games since 2023. Definitions for statistics at sfcsratings.com/definitions. @SFCSratings"
+  to D1 football games 2023-25. Definitions for statistics at sfcsratings.com/definitions. @SFCSratings"
   (`DEFINITIONS_URL` sets the link.)
 - **Row labels and number formats** are in `ROWS` if anything should read differently.
 

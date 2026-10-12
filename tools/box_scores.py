@@ -85,7 +85,7 @@ WATERMARK_OPACITY = 0.04   # SF|CS mark behind the stat-name column
 
 # Footer text (wording from the user).
 FOOTNOTE = ("Garbage time excluded. Shading indicates performance as percentile "
-            "relative to all D1 football games since 2023. "
+            "relative to D1 football games 2023-25. "
             f"Definitions for statistics at {DEFINITIONS_URL}. {HANDLE}")
 
 # ===========================================================================
