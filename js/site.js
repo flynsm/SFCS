@@ -42,7 +42,7 @@ const NAV = [
       ...CONFERENCES.filter((c) => c.races).map((c) => [c.label, `conferences/?c=${c.id}`]),
     ],
   },
-  { label: "Box Scores", href: "box-scores.html" },
+  { label: "Definitions", href: "definitions.html" },
   { label: "About SFCS", href: "about.html" },
 ];
 

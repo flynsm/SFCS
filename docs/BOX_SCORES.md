@@ -49,7 +49,8 @@ def_stuff_rate, havoc_rate, quality_drive_rate, pts_per_quality_drive, garbage_s
   The fallback is Arial Black / Arial.
 - **SFCS mark:** `MARK`, the dark-on-light SFCS mark file.
 - **Footnote** (`FOOTNOTE`, the user's wording): "Garbage time excluded. Shading indicates performance as percentile relative
-  to all D1 football games since 2023. @SFCSratings"
+  to all D1 football games since 2023. Definitions for statistics at sfcsratings.com/definitions. @SFCSratings"
+  (`DEFINITIONS_URL` sets the link.)
 - **Row labels and number formats** are in `ROWS` if anything should read differently.
 
 ## Try it

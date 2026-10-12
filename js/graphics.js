@@ -30,6 +30,7 @@
   };
 
   const D = window.SFCSData;
+  const HELP = `<p class="stats-help"><a href="${D.url("definitions.html")}">What do these stats mean?</a></p>`;
   const comingSoon = (msg) => `<div class="placeholder"><strong>Coming soon</strong>${msg}</div>`;
 
   function figure(src, alt) {
@@ -49,6 +50,7 @@
         <p class="eyebrow">Ratings${posted ? ` · ${latest.season} · Week ${week}` : ""}</p>
         <h1>${posted ? `Week ${week} ` : ""}${g.title}</h1>
         <p class="lede">${g.blurb}</p>
+        ${HELP}
       </header>
       ${posted ? figure(D.image(g.key, week), `Week ${week} ${g.title}`) : comingSoon("Not posted yet.")}`;
     document.title = `${posted ? `Week ${week} ` : ""}${g.title} · SFCS`;
@@ -65,6 +67,7 @@
           <p class="eyebrow">Conference Races${latest ? ` · Week ${latest.week}` : ""}</p>
           <h1>Conference Races</h1>
           <p class="lede">Title odds for every FCS conference.</p>
+          ${HELP}
         </header>
         <div class="conf-grid">
           ${confs.map((c) => `<a class="conf-tile" href="?c=${c.id}">${c.label}</a>`).join("")}
@@ -78,6 +81,7 @@
       <header class="page-head">
         <p class="eyebrow">Conference Races${posted ? ` · Week ${latest.week}` : ""}</p>
         <h1>${conf.label} Title Odds</h1>
+        ${HELP}
       </header>
       ${posted ? figure(D.image(key, latest.week), `Week ${latest.week} ${conf.label} title odds`) : comingSoon("Not posted yet.")}`;
     document.title = `${conf.label} Title Odds · SFCS`;
