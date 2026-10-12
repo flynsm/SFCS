@@ -547,6 +547,36 @@ h3 { font-size: 18px; }
 }
 .conf-tile:hover { background: var(--ink); color: var(--paper); }
 
+/* ---------- Definitions ---------- */
+
+.def-list { margin: 0; }
+.def-item {
+  display: grid;
+  grid-template-columns: minmax(180px, 280px) 1fr;
+  gap: 8px 32px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+}
+.def-item dt { font: 400 17px/1.3 var(--font-display); text-transform: uppercase; }
+.def-item dd { margin: 0; max-width: 68ch; }
+.def-item dd p { margin: 0 0 8px; }
+.def-item dd p:last-child { margin-bottom: 0; }
+.def-empty { color: var(--muted); font-style: italic; }
+.def-thresholds { font-size: 15px; color: var(--muted); }
+.def-thresholds span {
+  display: inline-block;
+  margin-right: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+}
+@media (max-width: 640px) { .def-item { grid-template-columns: 1fr; } }
+
+.stats-help { margin: 10px 0 0; font-size: 14px; }
+.stats-help a { color: var(--ink); font-weight: 600; text-decoration-color: var(--gold); text-underline-offset: 3px; }
+
 /* ---------- Placeholders / prose ---------- */
 
 .placeholder {

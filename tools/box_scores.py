@@ -76,13 +76,17 @@ INK, PAPER, CARD, ROW_ALT = "#161616", "#f4f2ed", "#fbfaf7", "#f0ede6"
 GOLD, MUTED, LINE = "#c9a961", "#6b6760", "#d6d1c4"
 BAD, MID, GOOD = (205, 92, 70), (251, 250, 247), (46, 125, 79)   # red - neutral - green
 
+# The website's Definitions page, on the custom domain.
+DEFINITIONS_URL = "sfcsratings.com/definitions"
+
 # Credit, written into the footnote.
 HANDLE = "@SFCSratings"
 WATERMARK_OPACITY = 0.04   # SF|CS mark behind the stat-name column
 
 # Footer text (wording from the user).
 FOOTNOTE = ("Garbage time excluded. Shading indicates performance as percentile "
-            f"relative to all D1 football games since 2023. {HANDLE}")
+            "relative to all D1 football games since 2023. "
+            f"Definitions for statistics at {DEFINITIONS_URL}. {HANDLE}")
 
 # ===========================================================================
 # Rows (the user's list; the final score sits in the header)

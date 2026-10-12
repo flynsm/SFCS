@@ -1,0 +1,125 @@
+{
+  "_instructions": "One entry per term; the page sorts them alphabetically. Fill in 'definition'. 'thresholds' is optional (how cutoffs or thresholds were chosen); leave it empty to hide it. A term with an empty definition shows 'Coming soon.' Add or remove terms freely.",
+  "terms": [
+    {
+      "term": "Biggest Improvers",
+      "definition": "",
+      "thresholds": ""
+    },
+    {
+      "term": "Defensive Stuff Rate",
+      "definition": "",
+      "thresholds": ""
+    },
+    {
+      "term": "Early Down Success Rate",
+      "definition": "",
+      "thresholds": ""
+    },
+    {
+      "term": "EPA per Play",
+      "definition": "",
+      "thresholds": ""
+    },
+    {
+      "term": "Expected Wins",
+      "definition": "",
+      "thresholds": ""
+    },
+    {
+      "term": "Explosive Play Rate",
+      "definition": "",
+      "thresholds": ""
+    },
+    {
+      "term": "Garbage Time",
+      "definition": "",
+      "thresholds": ""
+    },
+    {
+      "term": "Havoc Rate",
+      "definition": "",
+      "thresholds": ""
+    },
+    {
+      "term": "Late Down Success Rate",
+      "definition": "",
+      "thresholds": ""
+    },
+    {
+      "term": "Line Yards",
+      "definition": "",
+      "thresholds": ""
+    },
+    {
+      "term": "Offense / Defense Ratings",
+      "definition": "",
+      "thresholds": ""
+    },
+    {
+      "term": "Passing Success Rate",
+      "definition": "",
+      "thresholds": ""
+    },
+    {
+      "term": "Percentile Shading",
+      "definition": "",
+      "thresholds": ""
+    },
+    {
+      "term": "Points per Game Above",
+      "definition": "",
+      "thresholds": ""
+    },
+    {
+      "term": "Postgame Win Expectancy",
+      "definition": "",
+      "thresholds": ""
+    },
+    {
+      "term": "Power Rating",
+      "definition": "",
+      "thresholds": ""
+    },
+    {
+      "term": "Projected Score",
+      "definition": "",
+      "thresholds": ""
+    },
+    {
+      "term": "Pts/Quality Drive",
+      "definition": "",
+      "thresholds": ""
+    },
+    {
+      "term": "Quality Drive Rate",
+      "definition": "",
+      "thresholds": ""
+    },
+    {
+      "term": "Resume Rating",
+      "definition": "",
+      "thresholds": ""
+    },
+    {
+      "term": "Rushing Success Rate",
+      "definition": "",
+      "thresholds": ""
+    },
+    {
+      "term": "Title Odds",
+      "definition": "",
+      "thresholds": ""
+    },
+    {
+      "term": "Win Probability",
+      "definition": "",
+      "thresholds": ""
+    },
+    {
+      "term": "Yards per Play",
+      "definition": "",
+      "thresholds": ""
+    }
+  ]
+}

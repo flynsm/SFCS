@@ -18,9 +18,10 @@ index.html              Home page ("Latest" ratings cards)
 ratings/                Power, Resume, Offense/Defense (planned), Biggest Improvers: newest week
 games.html              Game cards with week + conference filters
 conferences/index.html  Conference title odds: conferences/?c=big_sky (all conferences without ?c)
-box-scores.html         Placeholder (box scores open from the Games page once they exist)
+definitions.html        Stat definitions (content in data/definitions.json)
 about.html              About page (fill in your bio)
 
+data/definitions.json   Stat definitions shown on the Definitions page (edit by hand)
 data/site_latest.json   Written by the export: current week + which images were posted
 data/games_<season>_wk<N>.csv   Written by the export: one file per week of games
 dashboards/week<N>_db/  Weekly images, same folder and file names as the model
