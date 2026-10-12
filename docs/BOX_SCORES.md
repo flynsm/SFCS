@@ -9,7 +9,9 @@
 in SFCS house style. Preview: [`box_score_demo.png`](box_score_demo.png).
 - **Size:** 1080 × ~1910 px (about 9:16), so it fits a phone screen.
 - **Header:** a compact SFCS mark and title, then the logos with the final score beside each one. It reads "AT", or "VS" plus
-  "NEUTRAL SITE" at neutral sites. The teams, score, date and neutral flag come from `games_schedule_current.parquet`;
+  "NEUTRAL SITE" at neutral sites.
+- **Credit:** "@SFCSratings" sits between the two scores (`HANDLE`), and a faint SF|CS watermark sits behind the stat-name
+  column (`WATERMARK_OPACITY`), so the credit can't be cropped off without cutting the score or the table. The teams, score, date and neutral flag come from `games_schedule_current.parquet`;
   logos come from `team_brand.parquet`.
 - **Rows** (the user's list): PGWE, EPA/play, yards/play, passing SR, rushing SR, explosive play rate, 3rd/4th down SR,
   line yards, defensive stuff rate, havoc rate, quality drive rate, finishing drives, offensive plays in garbage time.

@@ -76,6 +76,10 @@ INK, PAPER, CARD, ROW_ALT = "#161616", "#f4f2ed", "#fbfaf7", "#f0ede6"
 GOLD, MUTED, LINE = "#c9a961", "#6b6760", "#d6d1c4"
 BAD, MID, GOOD = (205, 92, 70), (251, 250, 247), (46, 125, 79)   # red - neutral - green
 
+# Credit, drawn between the two scores (hard to crop out).
+HANDLE = "@SFCSratings"
+WATERMARK_OPACITY = 0.06   # SF|CS mark behind the stat-name column
+
 # Footer text (wording from the user).
 FOOTNOTE = ("Garbage time excluded. Shading indicates performance as percentile "
             "relative to all D1 football games since 2023.")
@@ -225,6 +229,7 @@ def render(game: dict, values: dict, colors: dict, out: Path):
         d.text((sx, y + 92), str(int(mine)), font=F(FONTS_HEAVY, 100),
                fill=INK if mine >= theirs else "#a39e94", anchor="mm")
     d.text((cx, y + 92), at, font=F(FONTS_HEAVY, 34), fill=GOLD, anchor="mm")
+    d.text((cx, y + 178), HANDLE, font=_fit(HANDLE, FONTS_BOLD, 24, xc1 - xc0 - 190, 16), fill=MUTED, anchor="mm")
     y += team_h
 
     # Rows
@@ -234,11 +239,6 @@ def render(game: dict, values: dict, colors: dict, out: Path):
         y0, y1 = y + i * ROW_H, y + (i + 1) * ROW_H
         bg = CARD if i % 2 == 0 else ROW_ALT
         d.rectangle((xc0, y0, xc1, y1), fill=bg)
-        lf = _fit(row.label, FONTS_HEAVY, 30, label_w, 25)
-        lines = _wrap(row.label, lf, label_w)
-        for n, line in enumerate(lines):                 # one line, or two for long labels
-            d.text((cx, (y0 + y1) / 2 + (n - (len(lines) - 1) / 2) * 36), line, font=lf, fill=INK, anchor="mm")
-
         for side, x in (("away", xl), ("home", xr)):
             v, c = values[side].get(row.key), colors[side].get(row.key)
             shaded = not _missing(v) and not _missing(c)
@@ -247,6 +247,21 @@ def render(game: dict, values: dict, colors: dict, out: Path):
                    fill="#ffffff" if shaded and abs(c - 50) > 36 else INK, anchor="mm")
         d.line((M, y1, W - M, y1), fill=LINE, width=2)
     rows_bottom = y + ROW_H * len(ROWS)
+
+    # Faint SF|CS watermark behind the stat names (under the text)
+    if MARK.exists() and WATERMARK_OPACITY > 0:
+        wm = Image.open(MARK).convert("RGBA")
+        wm.thumbnail((int((xc1 - xc0) * 0.85), int((rows_bottom - y) * 0.6)), Image.LANCZOS)
+        wm.putalpha(wm.getchannel("A").point(lambda v: int(v * WATERMARK_OPACITY)))
+        im.paste(wm, (int(cx - wm.width / 2), int((y + rows_bottom) / 2 - wm.height / 2)), wm)
+
+    for i, row in enumerate(ROWS):                       # stat names, on top of the watermark
+        y0, y1 = y + i * ROW_H, y + (i + 1) * ROW_H
+        lf = _fit(row.label, FONTS_HEAVY, 30, label_w, 25)
+        lines = _wrap(row.label, lf, label_w)            # one line, or two for long labels
+        for n, line in enumerate(lines):
+            d.text((cx, (y0 + y1) / 2 + (n - (len(lines) - 1) / 2) * 36), line, font=lf, fill=INK, anchor="mm")
+
     d.line((xc0, y, xc0, rows_bottom), fill=LINE, width=2)
     d.line((xc1, y, xc1, rows_bottom), fill=LINE, width=2)
     d.rectangle((M, rows_bottom, W - M, rows_bottom + 5), fill=INK)
