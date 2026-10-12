@@ -76,9 +76,9 @@ INK, PAPER, CARD, ROW_ALT = "#161616", "#f4f2ed", "#fbfaf7", "#f0ede6"
 GOLD, MUTED, LINE = "#c9a961", "#6b6760", "#d6d1c4"
 BAD, MID, GOOD = (205, 92, 70), (251, 250, 247), (46, 125, 79)   # red - neutral - green
 
-# Credit, drawn between the two scores (hard to crop out).
+# Credit, drawn at the end of the footnote.
 HANDLE = "@SFCSratings"
-WATERMARK_OPACITY = 0.06   # SF|CS mark behind the stat-name column
+WATERMARK_OPACITY = 0.04   # SF|CS mark behind the stat-name column
 
 # Footer text (wording from the user).
 FOOTNOTE = ("Garbage time excluded. Shading indicates performance as percentile "
@@ -102,13 +102,14 @@ ROWS = [
     Row("pass_sr", "Passing Success Rate", "pct"),
     Row("rush_sr", "Rushing Success Rate", "pct"),
     Row("explosive_rate", "Explosive Play Rate", "pct"),
-    Row("late_down_sr", "3rd/4th Down Success Rate", "pct"),
+    Row("early_down_sr", "Early Down Success Rate", "pct"),
+    Row("late_down_sr", "Late Down Success Rate", "pct"),
     Row("line_yards", "Line Yards", "num2"),
     Row("def_stuff_rate", "Defensive Stuff Rate", "pct"),
     Row("havoc_rate", "Havoc Rate", "pct"),
     Row("quality_drive_rate", "Quality Drive Rate", "pct"),
-    Row("finishing_drives", "Finishing Drives", "num2"),
-    Row("garbage_share", "Offensive Plays in Garbage Time", "pct"),
+    Row("pts_per_quality_drive", "Pts/Quality Drive", "num2"),
+    Row("garbage_share", "Off Plays in Garbage Time", "pct"),
 ]
 
 # ===========================================================================
@@ -189,30 +190,29 @@ def render(game: dict, values: dict, colors: dict, out: Path):
 
     W, M = 1080, 36
     COL = 270                               # team value columns
-    ROW_H = 106
-    head_h, team_h = 168, 236
+    ROW_H = 100
+    head_h, team_h = 150, 236
     F = _font
 
-    reg = _font(FONTS_REGULAR, 23)
+    reg, bold = _font(FONTS_REGULAR, 23), _font(FONTS_BOLD, 23)
     foot_lines = _wrap(FOOTNOTE, reg, W - 2 * M)
-    foot_h = 40 + 32 * len(foot_lines) + 26
+    handle_w = bold.getlength(HANDLE)
+    handle_own_line = reg.getlength(foot_lines[-1]) + 30 + handle_w > W - 2 * M
+    foot_h = 40 + 32 * (len(foot_lines) + handle_own_line) + 26
     H = head_h + team_h + ROW_H * len(ROWS) + foot_h
     im = Image.new("RGB", (W, H), PAPER)
     d = ImageDraw.Draw(im)
 
-    # Compact title block: small mark left, title + matchup line, gold rule
+    # Compact title block: small mark left, title, gold rule
     if MARK.exists():
         mk = Image.open(MARK).convert("RGBA")
-        mk.thumbnail((96, 96), Image.LANCZOS)
-        im.paste(mk, (M, 34), mk)
+        mk.thumbnail((90, 90), Image.LANCZOS)
+        im.paste(mk, (M, 26), mk)
     at = "VS" if game["neutral"] else "AT"
-    tx = M + 120                             # text starts right of the mark
-    d.text((tx, 62), f"WEEK {game['week']} BOX SCORE", font=F(FONTS_HEAVY, 52), fill=INK, anchor="lm")
-    sub = f"{game['away'].upper()} {at} {game['home'].upper()} · {game['date_text']}"
-    if game["neutral"]:
-        sub += " · NEUTRAL SITE"
-    d.text((tx, 112), sub, font=_fit(sub, FONTS_BOLD, 24, W - M - tx, 16), fill=MUTED, anchor="lm")
-    d.rectangle((M, 148, W - M, 151), fill=GOLD)
+    tx = M + 116                             # title starts right of the mark
+    title = f"WEEK {game['week']} ADVANCED BOX SCORE"
+    d.text((tx, 72), title, font=_fit(title, FONTS_HEAVY, 52, W - M - tx, 30), fill=INK, anchor="lm")
+    d.rectangle((M, 130, W - M, 133), fill=GOLD)
 
     # Team header: logo + name in each value column, score beside it, AT/VS centered
     xl, xr = M, W - M - COL
@@ -229,7 +229,8 @@ def render(game: dict, values: dict, colors: dict, out: Path):
         d.text((sx, y + 92), str(int(mine)), font=F(FONTS_HEAVY, 100),
                fill=INK if mine >= theirs else "#a39e94", anchor="mm")
     d.text((cx, y + 92), at, font=F(FONTS_HEAVY, 34), fill=GOLD, anchor="mm")
-    d.text((cx, y + 178), HANDLE, font=_fit(HANDLE, FONTS_BOLD, 24, xc1 - xc0 - 190, 16), fill=MUTED, anchor="mm")
+    when = game["date_text"] + (" · NEUTRAL SITE" if game["neutral"] else "")
+    d.text((cx, y + 178), when, font=_fit(when, FONTS_BOLD, 24, xc1 - xc0 - 150, 16), fill=MUTED, anchor="mm")
     y += team_h
 
     # Rows
@@ -266,10 +267,12 @@ def render(game: dict, values: dict, colors: dict, out: Path):
     d.line((xc1, y, xc1, rows_bottom), fill=LINE, width=2)
     d.rectangle((M, rows_bottom, W - M, rows_bottom + 5), fill=INK)
 
-    # Footnote
+    # Footnote + credit (credit right-aligned on the last line, or its own line if it doesn't fit)
     y = rows_bottom + 40
     for n, line in enumerate(foot_lines):
         d.text((M, y + 32 * n), line, font=reg, fill=MUTED, anchor="lm")
+    hy = y + 32 * (len(foot_lines) - 1 + handle_own_line)
+    d.text((W - M, hy), HANDLE, font=bold, fill=INK, anchor="rm")
 
     out.parent.mkdir(parents=True, exist_ok=True)
     im.save(out, optimize=True)
