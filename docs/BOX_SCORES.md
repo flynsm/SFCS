@@ -6,17 +6,21 @@
 ## What it is
 
 [`tools/box_scores.py`](../tools/box_scores.py) draws one postgame box score PNG per FCS game, in SFCS house style.
-- **Layout:** away value | stat | home value.
-- **Percentiles:** each value shows its percentile against every D1-vs-D1 single-game team performance this season,
-  pooled (both sides of FBS-vs-FCS games included), and is shaded red → green by it ("higher = better for that team").
-- **Output:** the path the website already reads, so a finished image shows up as the **Box Score** link on that game's card
-  with no website changes: `dashboards/week<P>_db/box_scores/box_score_<contest_id>_wk<P>.png`.
+- **Header:** the logos, with the final score beside each one and "AT", or "VS" plus "NEUTRAL SITE" for neutral-site games.
+- **Rows:** away value | stat | home value.
+- **Shading:** each value is shaded red → green by its percentile against every D1-vs-D1 single-game team performance this
+  season, pooled (both sides of FBS-vs-FCS games included). Green = good for that team. The percentile number isn't printed.
+- **Output:** the path the website already reads, so a finished image shows up as the **Box Score** link on that game's card:
+  `dashboards/week<P>_db/box_scores/box_score_<contest_id>_wk<P>.png`.
 
-The decisions recorded in your memory and FINDINGS 246 are followed:
-- games covered: FCS-FCS and FBS-FCS;
-- the pooled D1 baseline;
-- garbage time excluded, with one footnote;
-- the EPA rows held back.
+**Rows (the user's list):**
+- PGWE, EPA/play, yards/play;
+- passing SR, rushing SR, explosive play rate, 3rd/4th down SR;
+- line yards per rush, defensive stuff rate, havoc rate;
+- quality drive rate, finishing drives (points per trip inside the 40);
+- offensive plays in garbage time.
+
+Garbage time is excluded from every stat except that last row, and one footnote says so.
 
 ## Install and try
 
@@ -32,11 +36,18 @@ The decisions recorded in your memory and FINDINGS 246 are followed:
 | Rows | Source the script expects | What's unknown |
 |---|---|---|
 | Final score | `processed/games_schedule_current.parquet` | none (confirmed in round 1) |
-| Postgame win expectancy | `dashboards/week<P>_db/pgwe_week<P>.xlsx`: Winner / Loser / Winner PGWE; loser = 1 − winner | which sheet holds FBS-vs-FCS games (both `FCS` and `FBS` are searched). 0–1 vs 0–100 is auto-detected. Shaded by its own value rather than a percentile. |
-| Success rate, passing SR, rushing SR, Q1–Q4 SR | play-level file, aggregated per (game, offense) with the success rule: 1st down ≥50% of distance, 2nd ≥70%, 3rd/4th 100% | `PLAYS.path` and every column name (game, offense, down, distance, yards, quarter, pass flag, rush flag, garbage flag, optional exclude flag for kneels/spikes). If you'd rather use `team_games`' own success rate for the overall row, set `TEAM_GAMES.cols.success_rate`. |
-| Sack rate allowed, stuffed rushes allowed, offensive plays in garbage time | `team_games.parquet` | its folder, the game-id and team columns, the three stat columns. Rates may be 0–1 or 0–100 (auto-detected). |
-| Points per opportunity, scoring opportunity rate | a per-game drives table (`drive_metrics.py`: trips inside the opponent's 40) | whether a per-game version is stored at all, its path, and its columns (game, team, drives, opportunities, points on those drives). |
-| EPA ×4 | n/a | waits for the EP rebuild: set `EPA_READY = True` and connect `EPA_SOURCE` (not yet written). They currently show "PENDING EP MODEL REBUILD". |
+| Postgame win expectancy | `dashboards/week<P>_db/pgwe_week<P>.xlsx`: Winner / Loser / Winner PGWE; loser = 1 − winner | which sheet holds FBS-vs-FCS games (both `FCS` and `FBS` are searched). Shaded by its own value. |
+| Yards/play, passing SR, rushing SR, explosive rate, 3rd/4th down SR, line yards, defensive stuff rate, garbage-time share | the play-level file (`PLAYS`), aggregated per (game, offense); defensive stats are credited to the defense | `PLAYS.path` and every column name: game, offense, defense, down, distance, yards, pass flag, rush flag, garbage flag, optional exclude flag |
+| EPA per play | `PLAYS.cols.epa` | leave `None` until the EP rebuild is done |
+| Havoc rate | a per-play defensive havoc flag (`PLAYS.cols.havoc`), **or** a per-game column (`TEAM_GAMES.cols.havoc_rate`) | whether either exists |
+| Quality drive rate, finishing drives | a per-game drives table (`DRIVES`): drives, quality drives, trips inside the 40, points on those trips | whether a per-game table exists, and **how the model defines a "quality drive"** |
+
+**Definitions the script computes. Confirm they match the model's or tell me the right ones:**
+- **Success:** 1st down ≥50% of distance, 2nd ≥70%, 3rd/4th 100%.
+- **Explosive:** a rush of 12+ yards or a pass of 15+.
+- **Line yards per rush:** losses count 120%, yards 0–4 100%, 5–10 50%, 11+ 0%.
+- **Defensive stuff rate:** the share of the opponent's rushes gaining 0 or fewer yards.
+- **Finishing drives:** points per trip inside the opponent's 40.
 
 Also:
 - **Team names:** for each source, `team_names: "ncaa" | "cfbd"`. CFBD names are mapped to NCAA names through
@@ -47,11 +58,14 @@ Also:
 - **The baseline** is built from whatever is connected: each stat is pooled over every team-game in a D1-vs-D1 game
   (from the schedule's `matchup`) that has a value. It's the current season only, since the schedule file holds 2026.
 
-## Tested (on a stand-in `fcs-model/` with your round-1 file names and columns, plus made-up play, team-game, drive and PGWE files)
+## Tested (on a stand-in `fcs-model/` with your round-1 file names and columns, plus made-up play, drive and PGWE files)
 
 - **Nothing connected:** every unconfirmed row draws as SOURCE TBD, with the DRAFT banner.
-- **Everything connected:** 16 games drew. One team's passing success rate recomputed by hand from the plays matched the
-  script exactly (0.7407). Percent-scale inputs were converted, and a low sack rate correctly shades green.
+- **Everything connected:** 16 games drew. These all matched hand calculations from the made-up plays exactly:
+  - passing success rate;
+  - line yards per rush;
+  - defensive stuff rate (credited to the right team).
+- **Neutral-site game:** shows "VS" and "NEUTRAL SITE".
 
 ## When it's ready for the weekly run (after the EP rebuild, per the user)
 
