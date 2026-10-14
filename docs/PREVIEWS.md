@@ -17,7 +17,7 @@
   - percentile = round((n − rank)/(n − 1)·100), with n = `div_n`;
   - continuous blend from neutral #e6e4df to blue #2f5aa8 (best) or red #bf4a43 (worst);
   - white text at a percentile ≥ 80 or < 20, otherwise #1c1c1c.
-- **Footnote:** "Ranks within each team's division. Definitions for statistics at sfcsratings.com/definitions. @SFCSratings". The SF|CS watermark is at 4%.
+- **Footnote:** "Ranks within each team's division. Definitions for stats at sfcsratings.com/definitions. @SFCSratings". The SF|CS watermark is at 4%.
 - **Output:** `dashboards/week<N>_db/previews/preview_<contest_id>_wk<N>.png`, where N is the upcoming week. The website already looks there, so a game's **Preview** link appears once its file exists.
 - **Size:** 1080 × ~1880 (phone).
 

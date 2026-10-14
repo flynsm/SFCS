@@ -66,7 +66,7 @@ HANDLE = "@SFCSratings"
 DEFINITIONS_URL = "sfcsratings.com/definitions"
 WATERMARK_OPACITY = 0.04
 FOOTNOTE = ("Ranks within each team's division. "
-            f"Definitions for statistics at {DEFINITIONS_URL}. {HANDLE}")
+            f"Definitions for stats at {DEFINITIONS_URL}. {HANDLE}")
 
 # House colors
 INK, PAPER, CARD, ROW_ALT = "#161616", "#f4f2ed", "#fbfaf7", "#f0ede6"
