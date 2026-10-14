@@ -8,8 +8,9 @@
 
 - **Header** (the same layout as the box score):
   - each team's logo, its name in the team's `ink` color, and its record line ("5-1 (3-0) Big Sky");
-  - **projected points** in large type beside each logo, with **win probability** underneath in smaller type;
-  - "AT" (or "VS" at neutral sites) with "PROJ" in the center, and the game date (plus "NEUTRAL SITE" when it applies).
+  - **projected points** in large type beside each logo, under a centered "PROJECTED SCORE" label;
+  - "WIN PROB" under each score, with the percentage below it;
+  - "AT" (or "VS" at neutral sites) between the scores, and the game date (plus "NEUTRAL SITE" when it applies) in the center.
 - **Two panels:** "<away> OFF vs <home> DEF" and "<home> OFF vs <away> DEF", with team names in their ink colors. Each row shows the offense's value and rank, the stat name, then the defense's rank and value.
 - **Stats:** Rating (side-of-ball rating), Success Rate, EPA/Dropback, EPA/Rush, Havoc Rate, Stuff Rate, Quality Drives, Finishing Drives.
 - **Rank badges:** shaded with the user's rule, applied exactly as written:

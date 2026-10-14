@@ -227,11 +227,12 @@ def draw_header(im, d, W, M, y, game, away, home):
                                      info.get("conf_name") or ""] if p) or "–"
         d.text((x + COL / 2, y + 206), line, font=_fit(line, FONTS_BOLD, 21, COL - 10, 13), fill=MUTED, anchor="mm")
         pts = fmt("num1", info.get("proj_pts"))
-        d.text((sx, y + 80), pts, font=_fit(pts, FONTS_HEAVY, 84, 180, 50), fill=INK, anchor="mm")
+        d.text((sx, y + 92), pts, font=_fit(pts, FONTS_HEAVY, 84, 180, 50), fill=INK, anchor="mm")
         wp = fmt("pct", info.get("win_prob"))
-        d.text((sx, y + 146), f"{wp} WIN PROB", font=_fit(f"{wp} WIN PROB", FONTS_BOLD, 20, 180, 13), fill=MUTED, anchor="mm")
-    d.text((cx, y + 70), at, font=_font(FONTS_HEAVY, 32), fill=GOLD, anchor="mm")
-    d.text((cx, y + 106), "PROJ", font=_font(FONTS_BOLD, 16), fill=MUTED, anchor="mm")
+        d.text((sx, y + 152), "WIN PROB", font=_font(FONTS_BOLD, 16), fill=MUTED, anchor="mm")
+        d.text((sx, y + 182), wp, font=_fit(wp, FONTS_HEAVY, 30, 180, 18), fill=INK, anchor="mm")
+    d.text((cx, y + 26), "PROJECTED SCORE", font=_font(FONTS_BOLD, 16), fill=MUTED, anchor="mm")
+    d.text((cx, y + 92), at, font=_font(FONTS_HEAVY, 32), fill=GOLD, anchor="mm")
     when = [game["date_text"]] + (["NEUTRAL SITE"] if game["neutral"] else [])
     for k, w in enumerate(when):
         d.text((cx, y + 206 + 24 * k), w, font=_fit(w, FONTS_BOLD, 19, 200, 12), fill=MUTED, anchor="mm")
