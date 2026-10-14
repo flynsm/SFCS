@@ -6,10 +6,9 @@ Install: copy to  <fcs-model>/site_export/previews.py   (next to export_site.py)
 Needs:   pandas, pyarrow, Pillow
 
 Usage:
-  python site_export/previews.py --week 7                    every FCS game in week 7 (portrait)
-  python site_export/previews.py --week 7 --landscape        wide version
+  python site_export/previews.py --week 7                    every FCS game in week 7
   python site_export/previews.py --week 7 --game 401868265
-  python site_export/previews.py --demo [--landscape]        layout preview with made-up numbers
+  python site_export/previews.py --demo                      layout preview with made-up numbers
 
 Output (the path the website already reads; a game's Preview link appears once it exists):
   dashboards/week<N>_db/previews/preview_<contest_id>_wk<N>.png      N = the UPCOMING week
@@ -209,25 +208,34 @@ def draw_badge(d, cx, cy, rank, n, w=78, h=46):
     d.text((cx, cy + 1), str(int(rank)), font=_font(FONTS_HEAVY, 26), fill=fg, anchor="mm")
 
 
-def draw_team_block(im, d, x0, x1, y, team, info, align=None):
-    """Logo, name (ink), record line, projected points + win probability."""
-    cx = (x0 + x1) / 2
-    lg = logo_image(team, 120)
-    im.paste(lg, (int(cx - lg.width / 2), y), lg)
-    name = team.upper()
-    d.text((cx, y + 150), name, font=_fit(name, FONTS_HEAVY, 34, x1 - x0 - 10, 20), fill=team_ink(team), anchor="mm")
-    rec = info.get("record") or ""
-    conf_rec = info.get("conf_record")
-    line = " ".join(p for p in [rec, f"({conf_rec})" if conf_rec else "", info.get("conf_name") or ""] if p)
-    d.text((cx, y + 190), line or "–", font=_fit(line or "–", FONTS_BOLD, 22, x1 - x0 - 10, 14), fill=MUTED, anchor="mm")
-    # projected points / win prob tiles
-    tw, th, gap = min(150, (x1 - x0 - 16) / 2), 104, 14
-    for k, (label, val) in enumerate((("PROJ PTS", fmt("num1", info.get("proj_pts"))),
-                                      ("WIN PROB", fmt("pct", info.get("win_prob"))))):
-        tx = cx - tw - gap / 2 + k * (tw + gap)
-        d.rounded_rectangle((tx, y + 225, tx + tw, y + 225 + th), radius=10, fill=CARD, outline=LINE, width=2)
-        d.text((tx + tw / 2, y + 252), label, font=_font(FONTS_BOLD, 17), fill=MUTED, anchor="mm")
-        d.text((tx + tw / 2, y + 295), val, font=_fit(val, FONTS_HEAVY, 40, tw - 14, 24), fill=INK, anchor="mm")
+def draw_header(im, d, W, M, y, game, away, home):
+    """Box-score-style header: logo + name (ink) + record line in the outer columns,
+    projected points in large type beside each logo, win probability under it,
+    AT/VS and the date in the center. Returns the bottom y."""
+    COL = 270
+    xc0, xc1 = M + COL, W - M - COL
+    cx = W / 2
+    at = "VS" if game["neutral"] else "AT"
+    for side, info, x, sx in (("away", away, M, xc0 + 88), ("home", home, W - M - COL, xc1 - 88)):
+        team = game[side]
+        lg = logo_image(team, 120)
+        im.paste(lg, (int(x + COL / 2 - lg.width / 2), y + 18), lg)
+        name = team.upper()
+        d.text((x + COL / 2, y + 172), name, font=_fit(name, FONTS_HEAVY, 28, COL - 16, 18), fill=team_ink(team), anchor="mm")
+        line = " ".join(p for p in [info.get("record") or "",
+                                     f"({info['conf_record']})" if info.get("conf_record") else "",
+                                     info.get("conf_name") or ""] if p) or "–"
+        d.text((x + COL / 2, y + 206), line, font=_fit(line, FONTS_BOLD, 21, COL - 10, 13), fill=MUTED, anchor="mm")
+        pts = fmt("num1", info.get("proj_pts"))
+        d.text((sx, y + 80), pts, font=_fit(pts, FONTS_HEAVY, 84, 180, 50), fill=INK, anchor="mm")
+        wp = fmt("pct", info.get("win_prob"))
+        d.text((sx, y + 146), f"{wp} WIN PROB", font=_fit(f"{wp} WIN PROB", FONTS_BOLD, 20, 180, 13), fill=MUTED, anchor="mm")
+    d.text((cx, y + 70), at, font=_font(FONTS_HEAVY, 32), fill=GOLD, anchor="mm")
+    d.text((cx, y + 106), "PROJ", font=_font(FONTS_BOLD, 16), fill=MUTED, anchor="mm")
+    when = [game["date_text"]] + (["NEUTRAL SITE"] if game["neutral"] else [])
+    for k, w in enumerate(when):
+        d.text((cx, y + 206 + 24 * k), w, font=_fit(w, FONTS_BOLD, 19, 200, 12), fill=MUTED, anchor="mm")
+    return y + 236
 
 
 def draw_panel(im, d, x0, x1, y, off_team, def_team, off, dfn, row_h=74):
@@ -295,45 +303,19 @@ def _footnote(d, W, M, y):
     return y + 30 * len(lines)
 
 
-def render(game, away, home, out: Path, landscape: bool):
-    """game: week, away, home, neutral, date_text; away/home: dicts of that team's input row."""
+def render(game, away, home, out: Path):
+    """game: week, away, home, neutral, date_text; away/home: dicts of that team's input row.
+    Sized for phones: 1080 wide."""
     from PIL import Image, ImageDraw
-    at = "VS" if game["neutral"] else "AT"
-    when = [game["date_text"]] + (["NEUTRAL SITE"] if game["neutral"] else [])
+    W, M = 1080, 36
     panel_h = 70 + 74 * len(STATS)
-
-    if not landscape:                                   # phone: header, then the two panels stacked
-        W, M = 1080, 36
-        im = Image.new("RGB", (W, 150 + 360 + 2 * panel_h + 36 + 200), PAPER)
-        d = ImageDraw.Draw(im)
-        _title(im, d, W, M, game["week"])
-        y = 160
-        draw_team_block(im, d, M, W / 2 - 95, y, game["away"], away, "left")
-        draw_team_block(im, d, W / 2 + 95, W - M, y, game["home"], home, "right")
-        d.text((W / 2, y + 60), at, font=_font(FONTS_HEAVY, 40), fill=GOLD, anchor="mm")
-        for k, line in enumerate(when):
-            d.text((W / 2, y + 112 + 26 * k), line, font=_fit(line, FONTS_BOLD, 19, 180, 12), fill=MUTED, anchor="mm")
-        top = y + 360
-        mid = draw_panel(im, d, M, W - M, top, game["away"], game["home"], away, home) + 36
-        bottom = draw_panel(im, d, M, W - M, mid, game["home"], game["away"], home, away)
-        _watermark(im, W / 2, (top + bottom) / 2, 420, 460)
-    else:                                               # wide: teams across the top, panels side by side
-        W, M = 1920, 40
-        im = Image.new("RGB", (W, 150 + 360 + panel_h + 200), PAPER)
-        d = ImageDraw.Draw(im)
-        _title(im, d, W, M, game["week"])
-        y = 160
-        draw_team_block(im, d, M + 200, W / 2 - 160, y, game["away"], away)
-        draw_team_block(im, d, W / 2 + 160, W - M - 200, y, game["home"], home)
-        d.text((W / 2, y + 60), at, font=_font(FONTS_HEAVY, 44), fill=GOLD, anchor="mm")
-        for k, line in enumerate(when):
-            d.text((W / 2, y + 115 + 28 * k), line, font=_fit(line, FONTS_BOLD, 21, 280, 12), fill=MUTED, anchor="mm")
-        top = y + 360
-        mid = W / 2
-        bottom = draw_panel(im, d, M, mid - 15, top, game["away"], game["home"], away, home)
-        draw_panel(im, d, mid + 15, W - M, top, game["home"], game["away"], home, away)
-        _watermark(im, W / 2, y + 270, 150, 150)
-
+    im = Image.new("RGB", (W, 150 + 260 + 2 * panel_h + 36 + 200), PAPER)
+    d = ImageDraw.Draw(im)
+    _title(im, d, W, M, game["week"])
+    top = draw_header(im, d, W, M, 150, game, away, home) + 14
+    mid = draw_panel(im, d, M, W - M, top, game["away"], game["home"], away, home) + 30
+    bottom = draw_panel(im, d, M, W - M, mid, game["home"], game["away"], home, away)
+    _watermark(im, W / 2, (top + bottom) / 2, 420, 460)
     end = _footnote(d, W, M, bottom + 40)
     im = im.crop((0, 0, W, end + 30))
     out.parent.mkdir(parents=True, exist_ok=True)
@@ -369,7 +351,7 @@ def _row(df, cid, team) -> dict:
     return {k: (None if pd.isna(v) else v) for k, v in m.iloc[0].items()}
 
 
-def build_week(week, only_game=None, landscape=False):
+def build_week(week, only_game=None):
     sched = pd.read_parquet(SCHEDULE)
     sched["contest_id"] = sched["contest_id"].astype(str)
     if "season_type" in sched.columns:
@@ -387,13 +369,13 @@ def build_week(week, only_game=None, landscape=False):
         info = dict(week=week, away=g.away_team, home=g.home_team, neutral=bool(g.neutral),
                     date_text=_date_text(pd.to_datetime(g.game_date, utc=True)))
         out = DASHBOARDS / f"week{week}_db" / "previews" / f"preview_{g.contest_id}_wk{week}.png"
-        render(info, away, home, out, landscape)
+        render(info, away, home, out)
         made += 1
     print(f"Wrote {made} preview(s) to {DASHBOARDS / f'week{week}_db' / 'previews'}"
           + (f"  ({incomplete} missing input rows, drawn as '–'; check PREVIEW_INPUT)" if incomplete else ""))
 
 
-def demo(out: Path, landscape: bool):
+def demo(out: Path):
     """Layout preview with made-up values and ranks (design review only)."""
     import random
     rnd = random.Random(11)
@@ -408,7 +390,7 @@ def demo(out: Path, landscape: bool):
         return r
 
     game = dict(week=7, away="Montana", home="Montana St.", neutral=False, date_text="SAT, OCT 17")
-    render(game, team("5-1", "3-0", "Big Sky", 24.3, 0.284), team("5-1", "2-1", "Big Sky", 31.6, 0.716), out, landscape)
+    render(game, team("5-1", "3-0", "Big Sky", 24.3, 0.284), team("5-1", "2-1", "Big Sky", 31.6, 0.716), out)
     print(f"Wrote demo to {out}")
 
 
@@ -416,14 +398,13 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--week", type=int, help="the UPCOMING week")
     ap.add_argument("--game", help="one contest_id only")
-    ap.add_argument("--landscape", action="store_true", help="wide layout instead of phone-shaped")
     ap.add_argument("--demo", action="store_true", help="layout preview with made-up numbers")
     ap.add_argument("--out", default="preview_demo.png", help="--demo output file")
     a = ap.parse_args()
     if a.demo:
-        demo(Path(a.out), a.landscape)
+        demo(Path(a.out))
     elif a.week:
-        build_week(a.week, a.game, a.landscape)
+        build_week(a.week, a.game)
     else:
         ap.error("give --week N (or --demo)")
 

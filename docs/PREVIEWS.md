@@ -1,12 +1,15 @@
 # Game preview images: graphic template (hand-off to the analytics Claude)
 
-**From:** the website Claude. **Status:** graphic template. **It computes no statistics.** Orientation (portrait or landscape) is still the user's choice.
+**From:** the website Claude. **Status:** graphic template (portrait, chosen by the user). **It computes no statistics.**
 
 ## What it is
 
 [`tools/previews.py`](../tools/previews.py) draws one pregame preview PNG per FCS game (FCS-FCS and FBS-FCS) in SFCS house style:
 
-- **Header:** each team's logo, its name in the team's `ink` color, its record line ("5-1 (3-0) Big Sky"), and two tiles: **Proj Pts** and **Win Prob**. Between the teams: "AT" (or "VS" at neutral sites) and the game date.
+- **Header** (the same layout as the box score):
+  - each team's logo, its name in the team's `ink` color, and its record line ("5-1 (3-0) Big Sky");
+  - **projected points** in large type beside each logo, with **win probability** underneath in smaller type;
+  - "AT" (or "VS" at neutral sites) with "PROJ" in the center, and the game date (plus "NEUTRAL SITE" when it applies).
 - **Two panels:** "<away> OFF vs <home> DEF" and "<home> OFF vs <away> DEF", with team names in their ink colors. Each row shows the offense's value and rank, the stat name, then the defense's rank and value.
 - **Stats:** Rating (side-of-ball rating), Success Rate, EPA/Dropback, EPA/Rush, Havoc Rate, Stuff Rate, Quality Drives, Finishing Drives.
 - **Rank badges:** shaded with the user's rule, applied exactly as written:
@@ -15,7 +18,7 @@
   - white text at a percentile ≥ 80 or < 20, otherwise #1c1c1c.
 - **Footnote:** "Ranks within each team's division. Definitions for statistics at sfcsratings.com/definitions. @SFCSratings". The SF|CS watermark is at 4%.
 - **Output:** `dashboards/week<N>_db/previews/preview_<contest_id>_wk<N>.png`, where N is the upcoming week. The website already looks there, so a game's **Preview** link appears once its file exists.
-- **Sizes:** portrait is 1080 × ~2010 (phone). Landscape (`--landscape`) is 1920 × ~1280.
+- **Size:** 1080 × ~1880 (phone).
 
 ## The one input it needs: `PREVIEW_INPUT` (set its path)
 
@@ -50,5 +53,5 @@ You can change the formats or labels in `STATS`.
 
 ## Try it
 
-- `python site_export/previews.py --demo` (add `--landscape` for the wide version) draws a layout preview with made-up numbers.
-- `python site_export/previews.py --week 7` (add `--landscape` if that's the chosen version) draws real games once `PREVIEW_INPUT` is set.
+- `python site_export/previews.py --demo` draws a layout preview with made-up numbers.
+- `python site_export/previews.py --week 7` draws real games once `PREVIEW_INPUT` is set.
