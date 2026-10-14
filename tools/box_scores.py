@@ -148,6 +148,17 @@ def fmt(row: Row, v) -> str:
     return f"{v:.2f}" if v >= 0 else f"−{abs(v):.2f}"
 
 
+def team_ink(team: str) -> str:
+    """The team's text color: the `ink` column of team_brand.parquet, used as-is."""
+    if TEAM_BRAND.exists():
+        brand = pd.read_parquet(TEAM_BRAND).set_index("team")
+        if "ink" in brand.columns and team in brand.index:
+            ink = brand.at[team, "ink"]
+            if isinstance(ink, str) and ink.startswith("#"):
+                return ink
+    return INK
+
+
 def logo_image(team: str, size: int):
     from PIL import Image, ImageDraw
     if TEAM_BRAND.exists():
@@ -226,7 +237,8 @@ def render(game: dict, values: dict, colors: dict, out: Path):
         lg = logo_image(game[side], 120)
         im.paste(lg, (int(x + COL / 2 - lg.width / 2), y + 18), lg)
         name = game[side].upper()
-        d.text((x + COL / 2, y + 178), name, font=_fit(name, FONTS_HEAVY, 28, COL - 16, 18), fill=INK, anchor="mm")
+        d.text((x + COL / 2, y + 178), name, font=_fit(name, FONTS_HEAVY, 28, COL - 16, 18),
+               fill=team_ink(game[side]), anchor="mm")
         mine, theirs = (a, h) if side == "away" else (h, a)
         d.text((sx, y + 92), str(int(mine)), font=F(FONTS_HEAVY, 100),
                fill=INK if mine >= theirs else "#a39e94", anchor="mm")

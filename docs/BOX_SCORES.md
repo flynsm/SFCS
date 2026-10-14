@@ -13,6 +13,7 @@ in SFCS house style. Preview: [`box_score_demo.png`](box_score_demo.png).
 - **Credit:** "@SFCSratings" as the last words of the footnote, in the same style (`HANDLE`), plus a faint SF|CS watermark behind the stat-name
   column (`WATERMARK_OPACITY`, 4%) that can't be cropped off without cutting the table. The teams, score, date and neutral flag come from `games_schedule_current.parquet`;
   logos come from `team_brand.parquet`.
+- **Team names** use each team's `ink` color from `team_brand.parquet`, used as-is.
 - **Rows** (the user's list): PGWE, EPA/play, yards/play, passing SR, rushing SR, explosive play rate, early down SR,
   late down SR, line yards, defensive stuff rate, havoc rate, quality drive rate, pts/quality drive, off plays in garbage time.
 - **Cells:** each shows the value, with the background shaded red → green by a color position **you supply**.
