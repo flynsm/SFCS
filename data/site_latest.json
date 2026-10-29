@@ -1,12 +1,30 @@
 {
   "season": 2026,
-  "week": 6,
-  "played_week": 5,
-  "games_weeks": [],
+  "week": 9,
+  "played_week": 8,
+  "games_weeks": [
+    6,
+    7,
+    8,
+    9
+  ],
   "products": [
     "ratings_fcs",
     "resume_rating_fcs_top30",
-    "unit_improvers_fcs"
+    "unit_improvers_fcs",
+    "title_odds_big_sky",
+    "title_odds_coastal_athletic",
+    "title_odds_ivy",
+    "title_odds_meac",
+    "title_odds_mvfc",
+    "title_odds_nec",
+    "title_odds_ovc",
+    "title_odds_patriot",
+    "title_odds_pioneer",
+    "title_odds_southern",
+    "title_odds_southland",
+    "title_odds_swac",
+    "title_odds_uac"
   ],
-  "updated": "2026-10-10T00:00:00Z"
+  "updated": "2026-10-29T14:19:57Z"
 }

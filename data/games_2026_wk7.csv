@@ -1,0 +1,60 @@
+contest_id,week,kickoff_et,neutral,away,away_conf,away_record,home,home_conf,home_record,proj_away,proj_home,home_win_prob,away_score,home_score,has_preview,has_box_score
+401867821,7,2026-10-16 19:00,0,Columbia,Ivy,3-1,Penn,Ivy,2-2,16.2,28.6,0.784,28,27,0,0
+401858261,7,2026-10-17 12:00,0,Charleston So.,OVC,3-3,Clemson,ACC,,3.3,42.5,0.998,0,37,0,0
+401866663,7,2026-10-17 12:00,0,Hampton,Coastal Athletic,1-5,Sacred Heart,Coastal Athletic,2-4,13.5,37.2,0.933,21,35,0,0
+401866668,7,2026-10-17 12:00,0,Chicago State,FCS Independents,1-5,N.C. A&T,Coastal Athletic,2-5,25.9,32.5,0.662,12,27,0,0
+401866669,7,2026-10-17 12:00,0,Rhode Island,Coastal Athletic,3-3,Yale,Ivy,3-1,21.6,31.7,0.74,41,23,0,0
+401867807,7,2026-10-17 12:00,0,Brown,Ivy,2-2,Princeton,Ivy,3-1,18.5,24.5,0.647,10,16,0,0
+401867901,7,2026-10-17 12:00,0,Central Conn. St.,NEC,2-3,Mercyhurst,NEC,1-5,30.7,24.7,0.352,43,40,0,0
+401867920,7,2026-10-17 12:00,0,New Haven,NEC,1-5,Robert Morris,NEC,3-3,18.6,27.9,0.723,26,15,0,0
+401867925,7,2026-10-17 12:00,0,Duquesne,NEC,1-4,Stonehill,NEC,2-4,23.5,23.9,0.511,14,7,0,0
+401856725,7,2026-10-17 13:00,0,The Citadel,Southern,2-4,Texas A&M,SEC,,2.1,53.6,1.0,0,41,0,0
+401866664,7,2026-10-17 13:00,0,Bryant,Coastal Athletic,4-2,Maine,Coastal Athletic,1-5,23.8,24.9,0.528,17,14,0,0
+401866665,7,2026-10-17 13:00,0,Monmouth,Coastal Athletic,4-2,New Hampshire,Coastal Athletic,2-5,31.4,27.6,0.405,42,21,0,0
+401867837,7,2026-10-17 13:00,0,Merrimack,FCS Independents,2-4,Dartmouth,Ivy,1-3,14.5,31.3,0.857,21,27,0,0
+401867841,7,2026-10-17 13:00,0,Holy Cross,Patriot,2-4,Harvard,Ivy,4-0,17.9,34.1,0.848,7,30,0,0
+401868002,7,2026-10-17 13:00,0,Georgetown,Patriot,1-4,Colgate,Patriot,4-2,13.3,35.9,0.924,27,17,0,0
+401868213,7,2026-10-17 13:00,0,Dayton,Pioneer,4-1,Butler,Pioneer,5-1,22.2,24.5,0.559,19,9,0,0
+401868222,7,2026-10-17 13:00,0,Morehead St.,Pioneer,1-5,Davidson,Pioneer,2-5,27.2,29.4,0.555,31,34,0,0
+401868257,7,2026-10-17 13:00,0,Marist,Pioneer,3-3,Drake,Pioneer,2-4,19.6,25.6,0.649,27,22,0,0
+401869132,7,2026-10-17 13:00,0,McNeese,Southland,2-4,Northwestern St.,Southland,0-6,39.6,19.2,0.098,24,21,0,0
+401868398,7,2026-10-17 13:30,0,VMI,Southern,0-6,Wofford,Southern,4-3,8.6,41.1,0.98,14,41,0,0
+401867830,7,2026-10-17 14:00,0,Lehigh,Patriot,6-0,Cornell,Ivy,2-2,27.7,20.2,0.319,38,48,0,0
+401867878,7,2026-10-17 14:00,0,South Dakota St.,MVFC,5-1,North Dakota,MVFC,5-2,29.2,25.7,0.412,10,21,0,0
+401868066,7,2026-10-17 14:00,0,Austin Peay,UAC,5-2,West Ga.,UAC,1-5,37.0,17.9,0.112,24,10,0,0
+401868277,7,2026-10-17 14:00,0,Presbyterian,Pioneer,3-3,Stetson,Pioneer,1-5,35.8,22.8,0.206,47,43,0,0
+401874037,7,2026-10-17 14:00,0,West Alabama,Gulf South,,West Florida,UAC,3-3,,,,3,37,0,0
+401866666,7,2026-10-17 14:30,0,UAlbany,Coastal Athletic,3-3,Stony Brook,Coastal Athletic,4-2,21.1,28.8,0.688,48,31,0,0
+401868145,7,2026-10-17 14:30,0,Eastern Ky.,UAC,2-4,Tennessee Tech,Southern,5-1,16.0,34.4,0.878,20,49,0,0
+401867993,7,2026-10-17 15:00,0,Lafayette,Patriot,1-4,Bucknell,Patriot,1-5,29.0,26.6,0.439,20,7,0,0
+401868096,7,2026-10-17 15:00,0,Idaho,Big Sky,1-5,Montana,Big Sky,5-2,23.0,36.5,0.804,42,35,0,0
+401868105,7,2026-10-17 15:00,0,Idaho St.,Big Sky,4-2,Weber St.,Big Sky,4-3,36.2,26.8,0.276,20,27,0,0
+401868181,7,2026-10-17 15:00,0,Lindenwood,OVC,1-4,Eastern Ill.,OVC,2-4,25.8,25.2,0.484,20,13,0,0
+401868189,7,2026-10-17 15:00,0,Gardner-Webb,OVC,2-5,UT Martin,OVC,2-4,26.3,23.6,0.431,6,17,0,0
+401868207,7,2026-10-17 15:00,0,Western Ill.,OVC,3-3,Southeast Mo. St.,OVC,3-3,23.8,32.4,0.708,30,40,0,0
+401868301,7,2026-10-17 15:00,0,Grambling,SWAC,4-2,Alabama A&M,SWAC,5-2,26.0,32.0,0.647,31,61,0,0
+401868330,7,2026-10-17 15:00,0,Alabama St.,SWAC,3-3,Ark.-Pine Bluff,SWAC,3-2,31.1,22.8,0.3,21,15,0,0
+401868361,7,2026-10-17 15:00,0,Alcorn,SWAC,4-3,Prairie View,SWAC,2-5,20.1,33.8,0.809,38,41,0,0
+401868943,7,2026-10-17 15:00,0,Bethune-Cookman,SWAC,3-3,Mississippi Val.,SWAC,3-4,35.1,20.4,0.176,34,14,0,0
+401868949,7,2026-10-17 15:00,0,Florida A&M,SWAC,2-4,Jackson St.,SWAC,5-1,17.9,35.8,0.872,17,27,0,0
+401866667,7,2026-10-17 15:30,0,Towson,Coastal Athletic,0-7,Campbell,Coastal Athletic,5-1,24.7,32.0,0.679,20,24,0,0
+401867961,7,2026-10-17 15:30,0,Morehouse,SIAC,,Howard,MEAC,2-4,,,,17,31,0,0
+401868012,7,2026-10-17 15:30,0,Villanova,Patriot,2-4,Fordham,Patriot,2-5,28.1,20.7,0.318,38,17,0,0
+401867849,7,2026-10-17 16:00,0,Illinois St.,MVFC,4-2,Southern Ill.,MVFC,3-4,25.6,26.6,0.524,35,14,0,0
+401868289,7,2026-10-17 16:00,0,Valparaiso,Pioneer,3-3,San Diego,Pioneer,2-4,20.1,34.4,0.818,13,38,0,0
+401868310,7,2026-10-17 16:00,0,SFA,Southland,6-0,Nicholls,Southland,2-4,39.0,14.7,0.061,56,0,0,0
+401867870,7,2026-10-17 17:00,0,South Dakota,MVFC,5-2,Murray St.,MVFC,1-5,42.4,16.1,0.048,48,20,0,0
+401867912,7,2026-10-17 17:00,0,LIU,NEC,2-5,Wagner,NEC,1-5,26.5,17.9,0.293,14,9,0,0
+401868319,7,2026-10-17 17:00,0,Lamar University,Southland,5-1,Southeastern La.,Southland,3-3,21.4,25.4,0.601,31,34,0,0
+401867897,7,2026-10-17 18:00,0,UNI,MVFC,3-2,Youngstown St.,MVFC,5-2,19.7,36.5,0.857,22,35,0,0
+401867968,7,2026-10-17 18:30,0,Morgan St.,MEAC,5-1,Tennessee St.,OVC,1-5,23.5,22.3,0.469,16,25,0,0
+401868055,7,2026-10-17 19:00,0,Abilene Christian,UAC,3-4,North Ala.,UAC,4-2,29.0,22.6,0.343,31,28,0,0
+401868088,7,2026-10-17 19:00,0,Montana St.,Big Sky,5-1,Eastern Wash.,Big Sky,2-5,39.0,21.5,0.133,56,20,0,0
+401868125,7,2026-10-17 19:00,0,Portland St.,Big Sky,2-4,Northern Ariz.,Big Sky,5-2,19.6,41.7,0.919,25,38,0,0
+401868134,7,2026-10-17 19:00,0,Central Ark.,UAC,2-4,Tarleton St.,UAC,6-0,20.1,40.4,0.902,35,49,0,0
+401868250,7,2026-10-17 19:00,0,UTRGV,Southland,3-3,UIW,Southland,2-4,25.1,28.0,0.572,16,41,0,0
+401868383,7,2026-10-17 19:00,0,Mercer,Southern,5-2,Samford,Southern,1-5,34.0,19.1,0.171,31,21,0,0
+401869152,7,2026-10-17 19:00,0,East Texas A&M,Southland,2-4,Houston Christian,Southland,3-3,23.4,26.2,0.572,24,43,0,0
+401858262,7,2026-10-17 19:30,0,Elon,Coastal Athletic,4-3,Stanford,ACC,,13.0,38.0,0.964,7,34,0,0
+401868079,7,2026-10-17 20:00,0,Cal Poly,Big Sky,4-3,Northern Colo.,Big Sky,2-5,24.1,25.1,0.527,18,28,0,0
+401868161,7,2026-10-17 20:00,0,UC Davis,Big Sky,4-2,Southern Utah,Big Sky,2-4,30.2,31.2,0.527,17,38,0,0
