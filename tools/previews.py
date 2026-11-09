@@ -225,30 +225,30 @@ def draw_header(im, d, W, M, y, game, away, home):
     xc0, xc1 = M + COL, W - M - COL
     cx = W / 2
     at = "VS" if game["neutral"] else "AT"
-    # Rows, top to bottom: PROJECTED SCORE label | logos, points and AT/VS on one centre line |
-    # WIN PROB label | team names, win probabilities and date on one line | records
-    label_y, mid, wp_label_y, line_y, rec_y = y + 18, y + 82, y + 136, y + 164, y + 196
+    # Logos, points and AT/VS share one centre line. Under each logo: name, record. Under each
+    # projected score: WIN PROB and the value, spaced as their own block. Under AT/VS: the date.
+    label_y, mid = y + 18, y + 82
     for side, info, x, sx in (("away", away, M, xc0 + 88), ("home", home, W - M - COL, xc1 - 88)):
         team = game[side]
         lg = logo_image(team, 110)
         im.paste(lg, (int(x + COL / 2 - lg.width / 2), int(mid - lg.height / 2)), lg)
         name = team.upper()
-        _text_vc(d, x + COL / 2, line_y, name, _fit(name, FONTS_HEAVY, 28, COL - 16, 18), team_ink(team))
+        _text_vc(d, x + COL / 2, mid + 80, name, _fit(name, FONTS_HEAVY, 28, COL - 16, 18), team_ink(team))
         line = " ".join(p for p in [info.get("record") or "",
                                      f"({info['conf_record']})" if info.get("conf_record") else "",
                                      info.get("conf_name") or ""] if p) or "–"
-        _text_vc(d, x + COL / 2, rec_y, line, _fit(line, FONTS_BOLD, 21, COL - 10, 13), MUTED)
+        _text_vc(d, x + COL / 2, mid + 112, line, _fit(line, FONTS_BOLD, 21, COL - 10, 13), MUTED)
         pts = fmt("num1", info.get("proj_pts"))
         _text_vc(d, sx, mid, pts, _fit(pts, FONTS_HEAVY, 84, 180, 50), INK)
-        _text_vc(d, sx, wp_label_y, "WIN PROB", _font(FONTS_BOLD, 16), MUTED)
+        _text_vc(d, sx, mid + 66, "WIN PROB", _font(FONTS_BOLD, 16), MUTED)
         wp = fmt("pct", info.get("win_prob"))
-        _text_vc(d, sx, line_y, wp, _fit(wp, FONTS_HEAVY, 30, 180, 18), INK)
+        _text_vc(d, sx, mid + 100, wp, _fit(wp, FONTS_HEAVY, 30, 180, 18), INK)
     _text_vc(d, cx, label_y, "PROJECTED SCORE", _font(FONTS_BOLD, 16), MUTED)
     _text_vc(d, cx, mid, at, _font(FONTS_HEAVY, 32), GOLD)
     when = [game["date_text"]] + (["NEUTRAL SITE"] if game["neutral"] else [])
     for k, w in enumerate(when):
-        _text_vc(d, cx, line_y + 32 * k, w, _fit(w, FONTS_BOLD, 19, 200, 12), MUTED)
-    return y + 218
+        _text_vc(d, cx, mid + 66 + 30 * k, w, _fit(w, FONTS_BOLD, 19, 200, 12), MUTED)
+    return y + 222
 
 
 def draw_panel(im, d, x0, x1, y, off_team, def_team, off, dfn, row_h=74):
