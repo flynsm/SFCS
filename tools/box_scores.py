@@ -166,6 +166,9 @@ def logo_image(team: str, size: int):
         uri = brand["logo"].get(team) if team in brand.index else None
         if isinstance(uri, str) and "base64," in uri:
             im = Image.open(io.BytesIO(base64.b64decode(uri.split("base64,", 1)[1]))).convert("RGBA")
+            box = im.getchannel("A").getbbox()
+            if box:
+                im = im.crop(box)
             im.thumbnail((size, size), Image.LANCZOS)
             return im
     # No logo (e.g. non-D1): lettered badge
@@ -184,6 +187,12 @@ def _fit(text: str, candidates, size: int, max_w: float, min_size: int):
         if f.getlength(text) <= max_w:
             return f
     return _font(candidates, min_size)
+
+
+def _text_vc(d, x: float, yc: float, text: str, font, fill):
+    """Draw text centred on x with its visible glyphs (not the font box) centred on yc."""
+    l, t, r, b = d.textbbox((x, 0), text, font=font, anchor="ms")
+    d.text((x, yc - (t + b) / 2), text, font=font, fill=fill, anchor="ms")
 
 
 def _wrap(text: str, font, max_w: float) -> list[str]:
@@ -206,26 +215,27 @@ def render(game: dict, values: dict, colors: dict, out: Path):
     W, M = 1080, 36
     COL = 270                               # team value columns
     ROW_H = 100
-    head_h, team_h = 150, 236
+    head_h, team_h = 100, 218
     F = _font
 
     reg = _font(FONTS_REGULAR, 23)
     foot_lines = _wrap(FOOTNOTE, reg, W - 2 * M)
-    foot_h = 40 + 32 * len(foot_lines) + 26
+    foot_h = 26 + 32 * len(foot_lines) - 4
     H = head_h + team_h + ROW_H * len(ROWS) + foot_h
     im = Image.new("RGB", (W, H), PAPER)
     d = ImageDraw.Draw(im)
 
-    # Compact title block: small mark left, title, gold rule
+    # Compact title block: title centred across the page (small mark at the left, if present), gold rule
+    side = 0
     if MARK.exists():
         mk = Image.open(MARK).convert("RGBA")
-        mk.thumbnail((90, 90), Image.LANCZOS)
-        im.paste(mk, (M, 26), mk)
+        mk.thumbnail((64, 64), Image.LANCZOS)
+        im.paste(mk, (M, int(44 - mk.height / 2)), mk)
+        side = 80                            # keep the centred title clear of the mark
     at = "VS" if game["neutral"] else "AT"
-    tx = M + 116                             # title starts right of the mark
     title = f"WEEK {game['week']} ADVANCED BOX SCORE"
-    d.text((tx, 72), title, font=_fit(title, FONTS_HEAVY, 52, W - M - tx, 30), fill=INK, anchor="lm")
-    d.rectangle((M, 130, W - M, 133), fill=GOLD)
+    _text_vc(d, W / 2, 44, title, _fit(title, FONTS_HEAVY, 52, W - 2 * (M + side), 30), INK)
+    d.rectangle((M, 82, W - M, 85), fill=GOLD)
 
     # Team header: logo + name in each value column, score beside it, AT/VS centered
     xl, xr = M, W - M - COL
@@ -233,18 +243,17 @@ def render(game: dict, values: dict, colors: dict, out: Path):
     cx = (xc0 + xc1) / 2
     y = head_h
     a, h = game["away_score"], game["home_score"]
-    for side, x, sx in (("away", xl, xc0 + 85), ("home", xr, xc1 - 85)):
-        lg = logo_image(game[side], 120)
-        im.paste(lg, (int(x + COL / 2 - lg.width / 2), y + 18), lg)
-        name = game[side].upper()
-        d.text((x + COL / 2, y + 178), name, font=_fit(name, FONTS_HEAVY, 28, COL - 16, 18),
-               fill=team_ink(game[side]), anchor="mm")
-        mine, theirs = (a, h) if side == "away" else (h, a)
-        d.text((sx, y + 92), str(int(mine)), font=F(FONTS_HEAVY, 100),
-               fill=INK if mine >= theirs else "#a39e94", anchor="mm")
-    d.text((cx, y + 92), at, font=F(FONTS_HEAVY, 34), fill=GOLD, anchor="mm")
+    mid = y + 80                             # logos, scores and AT/VS share this centre line
+    for team_side, x, sx in (("away", xl, xc0 + 85), ("home", xr, xc1 - 85)):
+        lg = logo_image(game[team_side], 120)
+        im.paste(lg, (int(x + COL / 2 - lg.width / 2), int(mid - lg.height / 2)), lg)
+        name = game[team_side].upper()
+        _text_vc(d, x + COL / 2, y + 170, name, _fit(name, FONTS_HEAVY, 28, COL - 16, 18), team_ink(game[team_side]))
+        mine, theirs = (a, h) if team_side == "away" else (h, a)
+        _text_vc(d, sx, mid, str(int(mine)), F(FONTS_HEAVY, 100), INK if mine >= theirs else "#a39e94")
+    _text_vc(d, cx, mid, at, F(FONTS_HEAVY, 34), GOLD)
     when = game["date_text"] + (" · NEUTRAL SITE" if game["neutral"] else "")
-    d.text((cx, y + 178), when, font=_fit(when, FONTS_BOLD, 24, xc1 - xc0 - 150, 16), fill=MUTED, anchor="mm")
+    _text_vc(d, cx, y + 170, when, _fit(when, FONTS_BOLD, 24, xc1 - xc0 - 150, 16), MUTED)
     y += team_h
 
     # Rows
@@ -282,7 +291,7 @@ def render(game: dict, values: dict, colors: dict, out: Path):
     d.rectangle((M, rows_bottom, W - M, rows_bottom + 5), fill=INK)
 
     # Footnote (includes the credit)
-    y = rows_bottom + 40
+    y = rows_bottom + 26
     for n, line in enumerate(foot_lines):
         d.text((M, y + 32 * n), line, font=reg, fill=MUTED, anchor="lm")
 
