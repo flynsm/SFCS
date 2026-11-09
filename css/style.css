@@ -487,9 +487,15 @@ h3 { font-size: 18px; }
 
 /* ---------- Popup ---------- */
 
+/* The popup shrinks to its image, and the image is sized to fit the screen's
+   height (and width), so a whole box score or preview shows without scrolling. */
 .modal {
-  width: min(1100px, calc(100vw - 32px));
+  --modal-chrome: 136px;   /* top border + header + body padding + footer link */
+  width: fit-content;
+  min-width: min(420px, calc(100vw - 32px));
+  max-width: calc(100vw - 32px);
   max-height: calc(100vh - 32px);
+  max-height: calc(100dvh - 32px);
   overflow: auto;
   padding: 0;
   border: 0;
@@ -510,7 +516,7 @@ h3 { font-size: 18px; }
   position: sticky;
   top: 0;
 }
-.modal-head h2 { font-size: 16px; }
+.modal-head h2 { font-size: 16px; flex: 1; width: 0; }   /* wraps to the image's width instead of widening the popup */
 .modal-close {
   background: none;
   border: 1px solid #444;
@@ -524,7 +530,12 @@ h3 { font-size: 18px; }
 }
 .modal-close:hover { border-color: var(--gold); }
 .modal-body { padding: 16px; }
-.modal-body img { margin: 0 auto; }
+.modal-body img {
+  margin: 0 auto;
+  width: auto;
+  max-height: calc(100vh - 32px - var(--modal-chrome));
+  max-height: calc(100dvh - 32px - var(--modal-chrome));
+}
 .modal-foot { padding: 0 16px 16px; font-size: 14px; }
 .modal-foot a { font-weight: 600; }
 
