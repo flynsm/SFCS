@@ -1,0 +1,63 @@
+contest_id,week,kickoff_et,neutral,away,away_conf,away_record,home,home_conf,home_record,proj_away,proj_home,home_win_prob,away_score,home_score,has_preview,has_box_score
+401867964,10,2026-11-05 19:30,0,South Carolina St.,MEAC,7-2,Howard,MEAC,4-5,29.8,22.2,0.315,35,28,1,1
+401866681,10,2026-11-07 12:00,0,N.C. A&T,Coastal Athletic,4-5,Monmouth,Coastal Athletic,7-2,20.7,41.8,0.909,17,21,1,1
+401866682,10,2026-11-07 12:00,0,Towson,Coastal Athletic,1-8,Sacred Heart,Coastal Athletic,4-4,23.4,25.6,0.555,43,40,1,1
+401867810,10,2026-11-07 12:00,0,Brown,Ivy,4-3,Yale,Ivy,4-3,20.3,32.0,0.772,24,20,1,1
+401867839,10,2026-11-07 12:00,0,Dartmouth,Ivy,4-3,Princeton,Ivy,5-2,19.6,22.1,0.563,14,21,1,1
+401867914,10,2026-11-07 12:00,0,LIU,NEC,3-6,New Haven,NEC,2-7,24.1,20.4,0.407,10,17,1,1
+401867922,10,2026-11-07 12:00,0,Robert Morris,NEC,4-5,Duquesne,NEC,4-4,22.7,26.2,0.586,13,10,1,1
+401867933,10,2026-11-07 12:00,0,Wagner,NEC,1-8,Mercyhurst,NEC,1-8,20.8,30.3,0.728,33,28,1,1
+401867976,10,2026-11-07 12:00,0,N.C. Central,MEAC,4-5,Norfolk St.,MEAC,4-5,29.1,27.8,0.467,29,28,1,1
+401868005,10,2026-11-07 12:00,0,Colgate,Patriot,5-4,Lehigh,Patriot,7-2,16.8,29.1,0.782,7,33,1,1
+401868232,10,2026-11-07 12:00,0,Valparaiso,Pioneer,4-4,Dayton,Pioneer,7-1,14.8,31.2,0.851,20,31,1,1
+401868268,10,2026-11-07 12:00,0,Morehead St.,Pioneer,2-7,Marist,Pioneer,4-5,11.9,37.6,0.949,13,14,1,1
+401868020,10,2026-11-07 12:30,0,Holy Cross,Patriot,4-5,Georgetown,Patriot,3-4,29.4,20.5,0.286,27,24,1,1
+401866683,10,2026-11-07 13:00,0,UAlbany,Coastal Athletic,6-3,Bryant,Coastal Athletic,5-4,22.1,22.8,0.518,7,31,1,1
+401866684,10,2026-11-07 13:00,0,Stony Brook,Coastal Athletic,5-4,Campbell,Coastal Athletic,7-2,28.3,31.1,0.569,35,48,1,1
+401866686,10,2026-11-07 13:00,0,Rhode Island,Coastal Athletic,5-4,New Hampshire,Coastal Athletic,2-7,27.3,22.0,0.369,21,24,1,1
+401867824,10,2026-11-07 13:00,0,Columbia,Ivy,4-3,Harvard,Ivy,6-1,13.1,35.7,0.924,0,37,1,1
+401867832,10,2026-11-07 13:00,0,Penn,Ivy,3-4,Cornell,Ivy,3-4,21.1,26.7,0.638,14,13,1,1
+401867904,10,2026-11-07 13:00,0,Central Conn. St.,NEC,5-3,Stonehill,NEC,4-5,26.7,22.3,0.39,31,7,1,1
+401867957,10,2026-11-07 13:00,0,Morgan St.,MEAC,5-4,Delaware St.,MEAC,5-4,24.5,26.5,0.55,14,24,1,1
+401867996,10,2026-11-07 13:00,0,Fordham,Patriot,2-7,Bucknell,Patriot,1-8,24.3,24.6,0.507,38,13,1,1
+401868031,10,2026-11-07 13:00,0,Lafayette,Patriot,3-5,William & Mary,Patriot,3-6,28.9,30.9,0.551,19,14,1,1
+401868038,10,2026-11-07 13:00,0,Richmond,Patriot,6-3,Villanova,Patriot,5-4,19.9,28.4,0.707,0,30,1,1
+401868216,10,2026-11-07 13:00,0,St. Thomas (MN),Pioneer,7-2,Butler,Pioneer,7-2,25.5,26.2,0.517,14,41,1,1
+401868224,10,2026-11-07 13:00,0,Stetson,Pioneer,1-8,Davidson,Pioneer,3-6,29.8,30.5,0.518,14,33,1,1
+401868259,10,2026-11-07 13:00,0,San Diego,Pioneer,4-5,Drake,Pioneer,3-6,25.1,29.2,0.601,40,17,1,1
+401868343,10,2026-11-07 13:00,0,Mercer,Southern,7-2,Chattanooga,Southern,6-3,26.3,22.6,0.407,14,7,1,1
+401868350,10,2026-11-07 13:00,0,Samford,Southern,3-6,ETSU,Southern,6-3,20.0,34.3,0.819,37,35,1,1
+401868399,10,2026-11-07 13:00,0,Wofford,Southern,5-4,Western Caro.,Southern,4-5,25.2,32.6,0.681,10,26,1,1
+401868191,10,2026-11-07 13:30,0,Lindenwood,OVC,4-4,Gardner-Webb,OVC,3-6,19.4,32.9,0.804,34,21,1,1
+401866685,10,2026-11-07 14:00,0,Hampton,Coastal Athletic,1-8,Elon,Coastal Athletic,4-5,12.3,39.9,0.96,6,24,1,1
+401867852,10,2026-11-07 14:00,0,Illinois St.,MVFC,7-2,North Dakota,MVFC,6-4,24.6,31.5,0.669,21,49,1,1
+401867872,10,2026-11-07 14:00,0,Youngstown St.,MVFC,7-2,Murray St.,MVFC,1-8,45.9,16.6,0.032,62,35,1,1
+401868176,10,2026-11-07 14:00,0,UT Martin,OVC,3-6,Charleston So.,OVC,4-5,21.0,20.9,0.498,20,10,1,1
+401868252,10,2026-11-07 14:00,0,UTRGV,Southland,4-5,Northwestern St.,Southland,0-9,41.8,16.7,0.055,52,7,1,1
+401868379,10,2026-11-07 14:00,0,Furman,Southern,2-7,The Citadel,Southern,2-7,23.4,24.1,0.517,24,14,1,1
+401872617,10,2026-11-07 14:00,0,South Dakota St.,MVFC,7-2,UNI,MVFC,4-4,33.0,17.5,0.163,41,15,1,1
+401868393,10,2026-11-07 14:30,0,VMI,Southern,0-9,Tennessee Tech,Southern,8-1,6.9,48.9,0.996,14,66,1,1
+401868116,10,2026-11-07 15:00,0,Portland St.,Big Sky,2-7,Montana,Big Sky,6-3,18.4,48.1,0.97,24,57,1,1
+401868153,10,2026-11-07 15:00,0,Northern Colo.,Big Sky,3-6,Southern Utah,Big Sky,3-6,21.5,30.6,0.717,24,31,1,1
+401868184,10,2026-11-07 15:00,0,Western Ill.,OVC,5-4,Eastern Ill.,OVC,3-6,29.8,27.4,0.441,44,23,1,1
+401868302,10,2026-11-07 15:00,0,Alabama A&M,SWAC,7-2,Prairie View,SWAC,4-5,21.9,30.7,0.712,10,31,1,1
+401868331,10,2026-11-07 15:00,0,Alabama St.,SWAC,4-4,Texas Southern,SWAC,3-5,33.9,20.6,0.2,34,31,1,1
+401868363,10,2026-11-07 15:00,0,Florida A&M,SWAC,2-7,Alcorn,SWAC,5-4,24.4,31.6,0.676,20,38,1,1
+401868939,10,2026-11-07 15:00,0,Ark.-Pine Bluff,SWAC,5-3,Grambling,SWAC,4-4,26.9,32.0,0.626,35,32,1,1
+401868945,10,2026-11-07 15:00,0,Bethune-Cookman,SWAC,5-4,Southern U.,SWAC,4-5,31.3,23.3,0.307,17,45,1,1
+401868961,10,2026-11-07 15:00,0,Mississippi Val.,SWAC,3-6,Jackson St.,SWAC,6-2,12.7,42.5,0.97,7,38,1,1
+401858290,10,2026-11-07 15:30,0,Merrimack,FCS Independents,4-5,Wake Forest,ACC,,3.9,50.7,1.0,0,77,1,1
+401868200,10,2026-11-07 15:30,0,Southeast Mo. St.,OVC,5-4,Tennessee St.,OVC,2-7,27.9,18.0,0.264,33,14,1,1
+401868068,10,2026-11-07 16:00,0,Eastern Ky.,UAC,3-6,Austin Peay,UAC,7-2,14.5,37.3,0.926,31,55,1,1
+401868313,10,2026-11-07 16:00,0,SFA,Southland,9-0,Lamar University,Southland,7-2,27.9,19.9,0.306,28,45,1,1
+401869153,10,2026-11-07 16:00,0,East Texas A&M,Southland,3-6,Nicholls,Southland,3-6,25.1,24.3,0.48,31,32,1,1
+401868082,10,2026-11-07 17:00,0,Northern Ariz.,Big Sky,7-2,Cal Poly,Big Sky,4-6,30.4,24.0,0.341,38,10,1,1
+401868090,10,2026-11-07 17:00,0,Eastern Wash.,Big Sky,2-7,Idaho,Big Sky,4-5,26.3,33.8,0.684,31,62,1,1
+401868137,10,2026-11-07 17:00,0,West Ga.,UAC,1-8,Central Ark.,UAC,2-7,22.7,31.0,0.703,14,35,1,1
+401869140,10,2026-11-07 17:00,0,McNeese,Southland,4-5,Houston Christian,Southland,4-5,26.3,24.0,0.441,10,0,1,1
+401867862,10,2026-11-07 18:00,0,Southern Ill.,MVFC,4-5,Indiana St.,MVFC,2-7,32.8,22.8,0.264,37,20,1,1
+401868108,10,2026-11-07 18:00,0,Montana St.,Big Sky,8-1,Idaho St.,Big Sky,6-3,33.1,24.2,0.287,28,26,1,1
+401868057,10,2026-11-07 19:00,0,Abilene Christian,UAC,5-4,Tarleton St.,UAC,9-0,23.6,32.3,0.709,27,40,1,1
+401868152,10,2026-11-07 19:00,0,West Florida,UAC,4-4,North Ala.,UAC,5-4,24.8,25.1,0.507,21,28,1,1
+401868166,10,2026-11-07 19:00,0,Utah Tech,Big Sky,1-8,UC Davis,Big Sky,5-4,19.5,40.4,0.908,17,24,1,1
+401868321,10,2026-11-07 19:00,0,UIW,Southland,5-4,Southeastern La.,Southland,4-5,23.9,30.7,0.667,35,16,1,1
