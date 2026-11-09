@@ -120,6 +120,12 @@ def _fit(text, candidates, size, max_w, min_size):
     return _font(candidates, min_size)
 
 
+def _text_vc(d, x, yc, text, font, fill):
+    """Draw text centred on x with its visible glyphs (not the font box) centred on yc."""
+    l, t, r, b = d.textbbox((x, 0), text, font=font, anchor="ms")
+    d.text((x, yc - (t + b) / 2), text, font=font, fill=fill, anchor="ms")
+
+
 def _wrap(text, font, max_w):
     lines = [""]
     for w in text.split():
@@ -184,6 +190,9 @@ def logo_image(team, size):
     uri = b["logo"].get(team) if "logo" in b.columns and team in b.index else None
     if isinstance(uri, str) and "base64," in uri:
         im = Image.open(io.BytesIO(base64.b64decode(uri.split("base64,", 1)[1]))).convert("RGBA")
+        box = im.getchannel("A").getbbox()
+        if box:                             # centre on the visible artwork, not transparent padding
+            im = im.crop(box)
         im.thumbnail((size, size), Image.LANCZOS)
         return im
     # No logo: ink badge with white bold letters (house rule)
@@ -216,27 +225,30 @@ def draw_header(im, d, W, M, y, game, away, home):
     xc0, xc1 = M + COL, W - M - COL
     cx = W / 2
     at = "VS" if game["neutral"] else "AT"
+    # Logos, points and AT/VS share one centre line. Under each logo: name, record. Under each
+    # projected score: WIN PROB and the value, spaced as their own block. Under AT/VS: the date.
+    label_y, mid = y + 18, y + 82
     for side, info, x, sx in (("away", away, M, xc0 + 88), ("home", home, W - M - COL, xc1 - 88)):
         team = game[side]
-        lg = logo_image(team, 120)
-        im.paste(lg, (int(x + COL / 2 - lg.width / 2), y + 18), lg)
+        lg = logo_image(team, 110)
+        im.paste(lg, (int(x + COL / 2 - lg.width / 2), int(mid - lg.height / 2)), lg)
         name = team.upper()
-        d.text((x + COL / 2, y + 172), name, font=_fit(name, FONTS_HEAVY, 28, COL - 16, 18), fill=team_ink(team), anchor="mm")
+        _text_vc(d, x + COL / 2, mid + 80, name, _fit(name, FONTS_HEAVY, 28, COL - 16, 18), team_ink(team))
         line = " ".join(p for p in [info.get("record") or "",
                                      f"({info['conf_record']})" if info.get("conf_record") else "",
                                      info.get("conf_name") or ""] if p) or "–"
-        d.text((x + COL / 2, y + 206), line, font=_fit(line, FONTS_BOLD, 21, COL - 10, 13), fill=MUTED, anchor="mm")
+        _text_vc(d, x + COL / 2, mid + 112, line, _fit(line, FONTS_BOLD, 21, COL - 10, 13), MUTED)
         pts = fmt("num1", info.get("proj_pts"))
-        d.text((sx, y + 92), pts, font=_fit(pts, FONTS_HEAVY, 84, 180, 50), fill=INK, anchor="mm")
+        _text_vc(d, sx, mid, pts, _fit(pts, FONTS_HEAVY, 84, 180, 50), INK)
+        _text_vc(d, sx, mid + 66, "WIN PROB", _font(FONTS_BOLD, 16), MUTED)
         wp = fmt("pct", info.get("win_prob"))
-        d.text((sx, y + 152), "WIN PROB", font=_font(FONTS_BOLD, 16), fill=MUTED, anchor="mm")
-        d.text((sx, y + 182), wp, font=_fit(wp, FONTS_HEAVY, 30, 180, 18), fill=INK, anchor="mm")
-    d.text((cx, y + 26), "PROJECTED SCORE", font=_font(FONTS_BOLD, 16), fill=MUTED, anchor="mm")
-    d.text((cx, y + 92), at, font=_font(FONTS_HEAVY, 32), fill=GOLD, anchor="mm")
+        _text_vc(d, sx, mid + 100, wp, _fit(wp, FONTS_HEAVY, 30, 180, 18), INK)
+    _text_vc(d, cx, label_y, "PROJECTED SCORE", _font(FONTS_BOLD, 16), MUTED)
+    _text_vc(d, cx, mid, at, _font(FONTS_HEAVY, 32), GOLD)
     when = [game["date_text"]] + (["NEUTRAL SITE"] if game["neutral"] else [])
     for k, w in enumerate(when):
-        d.text((cx, y + 206 + 24 * k), w, font=_fit(w, FONTS_BOLD, 19, 200, 12), fill=MUTED, anchor="mm")
-    return y + 236
+        _text_vc(d, cx, mid + 66 + 30 * k, w, _fit(w, FONTS_BOLD, 19, 200, 12), MUTED)
+    return y + 222
 
 
 def draw_panel(im, d, x0, x1, y, off_team, def_team, off, dfn, row_h=74):
@@ -286,14 +298,15 @@ def _watermark(im, cx, cy, max_w, max_h):
 
 def _title(im, d, W, M, week):
     from PIL import Image
+    side = 0
     if MARK.exists():
         mk = Image.open(MARK).convert("RGBA")
-        mk.thumbnail((90, 90), Image.LANCZOS)
-        im.paste(mk, (M, 26), mk)
-    tx = M + 116
+        mk.thumbnail((64, 64), Image.LANCZOS)
+        im.paste(mk, (M, int(44 - mk.height / 2)), mk)
+        side = 80                           # keep the centred title clear of the mark
     title = f"WEEK {week} GAME PREVIEW"
-    d.text((tx, 72), title, font=_fit(title, FONTS_HEAVY, 52, W - M - tx, 30), fill=INK, anchor="lm")
-    d.rectangle((M, 130, W - M, 133), fill=GOLD)
+    _text_vc(d, W / 2, 44, title, _fit(title, FONTS_HEAVY, 52, W - 2 * (M + side), 30), INK)
+    d.rectangle((M, 82, W - M, 85), fill=GOLD)
 
 
 def _footnote(d, W, M, y):
@@ -313,12 +326,12 @@ def render(game, away, home, out: Path):
     im = Image.new("RGB", (W, 150 + 260 + 2 * panel_h + 36 + 200), PAPER)
     d = ImageDraw.Draw(im)
     _title(im, d, W, M, game["week"])
-    top = draw_header(im, d, W, M, 150, game, away, home) + 14
+    top = draw_header(im, d, W, M, 100, game, away, home) + 14
     mid = draw_panel(im, d, M, W - M, top, game["away"], game["home"], away, home) + 30
     bottom = draw_panel(im, d, M, W - M, mid, game["home"], game["away"], home, away)
     _watermark(im, W / 2, (top + bottom) / 2, 420, 460)
-    end = _footnote(d, W, M, bottom + 40)
-    im = im.crop((0, 0, W, end + 30))
+    end = _footnote(d, W, M, bottom + 26)
+    im = im.crop((0, 0, W, end - 2))
     out.parent.mkdir(parents=True, exist_ok=True)
     im.save(out, optimize=True)
 
