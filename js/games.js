@@ -168,7 +168,7 @@
   function openModal(g, kind) {
     const src = kind === "box" ? D.boxScore(g.id, g.week) : D.preview(g.id, g.week);
     const label = kind === "box" ? "Box Score" : "Game Preview";
-    el.modalTitle.textContent = `${g.away.name} ${g.neutral ? "vs" : "at"} ${g.home.name} · ${label}`;
+    el.modal.setAttribute("aria-label", `${g.away.name} ${g.neutral ? "vs" : "at"} ${g.home.name} · ${label}`);
     el.modalBody.innerHTML = `<img src="${src}" alt="${esc(label)}: ${esc(g.away.name)} at ${esc(g.home.name)}">`;
     el.modalBody.querySelector("img").onerror = () => {
       el.modalBody.innerHTML = `<div class="placeholder"><strong>Not posted yet</strong>Check back soon.</div>`;
@@ -184,7 +184,7 @@
     el = {
       eyebrow: $("games-eyebrow"), title: $("games-title"), weeks: $("week-chips"), confs: $("conf-chips"),
       summary: $("games-summary"), grid: $("games-grid"), modal: $("game-modal"),
-      modalTitle: $("game-modal-title"), modalBody: $("game-modal-body"), modalFull: $("game-modal-full"),
+      modalBody: $("game-modal-body"), modalFull: $("game-modal-full"),
     };
 
     latest = await D.latest();
