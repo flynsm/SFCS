@@ -25,8 +25,7 @@
     try {
       const res = await fetch(D.url("data/definitions.json"), { cache: "no-cache" });
       const terms = (await res.json()).terms
-        .filter((t) => t.term?.trim())
-        .sort((a, b) => a.term.localeCompare(b.term, "en", { sensitivity: "base" }));
+        .filter((t) => t.term?.trim());   // shown in the file's order
       el.innerHTML = `<dl class="def-list">${terms.map(term).join("")}</dl>`;
     } catch (err) {
       console.error(err);
