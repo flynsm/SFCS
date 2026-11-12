@@ -1,0 +1,59 @@
+contest_id,week,kickoff_et,neutral,away,away_conf,away_record,home,home_conf,home_record,proj_away,proj_home,home_win_prob,away_score,home_score,has_preview,has_box_score
+401868094,5,2026-10-02 22:30,0,Montana St.,Big Sky,5-0,Idaho,Big Sky,0-4,34.6,22.0,0.216,34,35,0,1
+401866654,5,2026-10-03 12:00,0,Brown,Ivy,1-1,Rhode Island,Coastal Athletic,2-3,23.5,27.2,0.592,10,13,0,1
+401867819,5,2026-10-03 12:00,0,Princeton,Ivy,1-1,Columbia,Ivy,2-0,23.1,19.5,0.411,35,7,0,1
+401867899,5,2026-10-03 12:00,0,Wagner,NEC,1-3,Central Conn. St.,NEC,0-3,16.6,33.0,0.846,14,45,0,1
+401867910,5,2026-10-03 12:00,0,Mercyhurst,NEC,1-4,LIU,NEC,0-5,19.2,30.3,0.756,24,27,0,1
+401868010,5,2026-10-03 12:00,0,Fordham,Patriot,1-4,Lehigh,Patriot,5-0,15.1,36.4,0.908,0,34,0,1
+401868276,5,2026-10-03 12:00,0,St. Thomas (MN),Pioneer,4-1,Presbyterian,Pioneer,1-3,37.5,15.1,0.081,21,55,0,1
+401870840,5,2026-10-03 12:00,0,Merrimack,FCS Independents,2-3,Yale,Ivy,1-1,15.0,35.4,0.899,24,41,0,1
+401867828,5,2026-10-03 12:30,0,Cornell,Ivy,1-1,Georgetown,Patriot,0-3,29.3,18.6,0.252,35,14,0,1
+401868029,5,2026-10-03 12:30,0,Richmond,Patriot,4-1,Lafayette,Patriot,1-3,25.8,26.5,0.518,40,31,0,1
+401866650,5,2026-10-03 13:00,0,Elon,Coastal Athletic,4-1,New Hampshire,Coastal Athletic,1-4,26.0,19.1,0.332,23,30,0,1
+401866651,5,2026-10-03 13:00,0,Towson,Coastal Athletic,0-5,Monmouth,Coastal Athletic,3-2,25.4,35.2,0.73,40,41,0,1
+401867967,5,2026-10-03 13:00,0,Morgan St.,MEAC,3-1,Villanova,Patriot,2-3,19.3,29.5,0.737,38,35,0,1
+401868228,5,2026-10-03 13:00,0,Dayton,Pioneer,3-0,Drake,Pioneer,1-3,22.8,22.0,0.48,22,30,0,1
+401868264,5,2026-10-03 13:00,0,Marist,Pioneer,2-2,Stetson,Pioneer,1-3,30.1,19.1,0.248,28,14,0,1
+401868270,5,2026-10-03 13:00,0,Valparaiso,Pioneer,1-3,Morehead St.,Pioneer,1-3,26.1,24.0,0.448,37,3,0,1
+401867835,5,2026-10-03 13:30,0,Penn,Ivy,1-1,Dartmouth,Ivy,0-2,20.2,27.9,0.685,10,14,0,1
+401868381,5,2026-10-03 13:30,0,Mercer,Southern,3-2,VMI,Southern,0-5,37.7,12.4,0.058,54,3,0,1
+401867869,5,2026-10-03 14:00,0,Murray St.,MVFC,1-4,North Dakota,MVFC,4-1,10.8,45.3,0.984,28,55,0,1
+401867918,5,2026-10-03 14:00,0,Norfolk St.,MEAC,3-2,Robert Morris,NEC,2-2,20.6,26.8,0.649,31,33,0,1
+401867986,5,2026-10-03 14:00,0,The Citadel,Southern,1-3,South Carolina St.,MEAC,5-0,19.0,29.2,0.739,34,31,0,1
+401868375,5,2026-10-03 14:00,0,Wofford,Southern,2-3,Furman,Southern,2-3,20.8,22.7,0.546,32,25,0,1
+401866656,5,2026-10-03 15:00,1,Howard,MEAC,1-3,Hampton,Coastal Athletic,1-4,31.4,19.8,0.234,27,13,0,1
+401867859,5,2026-10-03 15:00,0,Indiana St.,MVFC,2-3,South Dakota,MVFC,3-2,19.3,38.0,0.878,14,44,0,1
+401868359,5,2026-10-03 15:00,0,Alcorn,SWAC,3-2,Grambling,SWAC,2-2,21.4,27.9,0.658,59,63,0,1
+401868965,5,2026-10-03 15:00,0,Prairie View,SWAC,2-3,Mississippi Val.,SWAC,1-4,38.5,12.4,0.051,27,28,0,1
+401862793,5,2026-10-03 15:30,0,Samford,Southern,1-3,UAB,American Athletic,,13.4,39.5,0.949,14,33,0,1
+401866652,5,2026-10-03 15:30,0,Sacred Heart,Coastal Athletic,1-3,Maine,Coastal Athletic,1-4,21.1,25.4,0.606,24,16,0,1
+401866655,5,2026-10-03 15:30,0,Delaware St.,MEAC,3-2,UAlbany,Coastal Athletic,2-3,20.0,29.9,0.732,3,28,0,1
+401868025,5,2026-10-03 15:30,0,Holy Cross,Patriot,1-4,William & Mary,Patriot,2-3,27.3,28.3,0.524,41,14,0,1
+401868339,5,2026-10-03 15:30,0,Chattanooga,Southern,3-2,ETSU,Southern,3-2,26.9,26.4,0.489,3,14,0,1
+401868114,5,2026-10-03 16:00,0,Northern Colo.,Big Sky,2-3,Montana,Big Sky,4-1,16.9,37.8,0.904,14,36,0,1
+401868197,5,2026-10-03 16:00,0,Tennessee St.,OVC,1-3,Western Ill.,OVC,2-3,19.1,32.4,0.795,21,28,0,1
+401868220,5,2026-10-03 16:00,0,Davidson,Pioneer,2-3,San Diego,Pioneer,1-3,19.6,41.0,0.91,14,63,0,1
+401868328,5,2026-10-03 16:00,0,Alabama St.,SWAC,3-1,Bethune-Cookman,SWAC,2-2,31.0,22.4,0.295,10,16,0,1
+401867891,5,2026-10-03 17:00,0,Youngstown St.,MVFC,3-2,Southern Ill.,MVFC,3-2,31.4,28.6,0.43,28,16,0,1
+401868064,5,2026-10-03 17:00,0,New Haven,NEC,1-4,Austin Peay,UAC,4-1,8.8,43.4,0.984,17,42,0,1
+401868295,5,2026-10-03 17:00,1,Alabama A&M,SWAC,4-1,Jackson St.,SWAC,4-0,25.4,30.8,0.634,28,31,0,1
+401862790,5,2026-10-03 18:00,0,Texas Southern,SWAC,1-3,Fla. Atlantic,American Athletic,,9.9,50.1,0.994,10,66,0,1
+401866653,5,2026-10-03 18:00,0,N.C. A&T,Coastal Athletic,1-4,Bryant,Coastal Athletic,3-1,19.8,32.0,0.776,30,31,0,1
+401866657,5,2026-10-03 18:00,0,Campbell,Coastal Athletic,4-1,N.C. Central,MEAC,2-3,31.5,24.9,0.341,38,31,0,1
+401868143,5,2026-10-03 18:00,0,North Ala.,UAC,3-2,Eastern Ky.,UAC,1-3,27.2,23.3,0.404,20,16,0,1
+401868173,5,2026-10-03 18:00,0,Gardner-Webb,OVC,1-4,Charleston So.,OVC,2-2,26.5,19.5,0.331,12,10,0,1
+401868309,5,2026-10-03 18:00,0,UIW,Southland,2-2,SFA,Southland,5-0,16.5,38.4,0.914,26,28,0,1
+401868391,5,2026-10-03 18:00,0,Tennessee Tech,Southern,4-0,Western Caro.,Southern,2-3,36.4,26.2,0.262,20,44,0,1
+401867688,5,2026-10-03 19:00,0,Chicago State,FCS Independents,1-4,Tarleton St.,UAC,4-0,5.4,58.0,0.999,21,56,0,1
+401867840,5,2026-10-03 19:00,0,Colgate,Patriot,4-1,Harvard,Ivy,2-0,21.6,27.4,0.642,17,20,0,1
+401867848,5,2026-10-03 19:00,0,South Dakota St.,MVFC,4-1,Illinois St.,MVFC,4-1,28.6,22.8,0.358,31,14,0,1
+401868248,5,2026-10-03 19:00,0,UTRGV,Southland,2-2,East Texas A&M,Southland,1-4,30.5,20.6,0.269,17,20,0,1
+401868936,5,2026-10-03 19:00,0,Ark.-Pine Bluff,SWAC,2-2,Southern U.,SWAC,2-3,26.5,30.0,0.586,41,10,0,1
+401869131,5,2026-10-03 19:00,0,Northwestern St.,Southland,0-5,Lamar University,Southland,3-1,9.3,40.9,0.975,14,42,0,1
+401869151,5,2026-10-03 19:00,0,Nicholls,Southland,2-3,Houston Christian,Southland,2-3,22.9,28.3,0.634,2,16,0,1
+401856706,5,2026-10-03 19:45,0,McNeese,Southland,2-3,LSU,SEC,,-1.0,52.5,1.0,14,63,0,1
+401868053,5,2026-10-03 20:00,0,West Florida,UAC,3-1,Abilene Christian,UAC,1-4,27.2,25.9,0.467,7,35,0,1
+401868077,5,2026-10-03 20:00,0,Weber St.,Big Sky,2-3,Cal Poly,Big Sky,3-2,29.5,31.2,0.543,42,34,0,1
+401868104,5,2026-10-03 20:00,0,Northern Ariz.,Big Sky,3-2,Idaho St.,Big Sky,4-0,23.2,32.1,0.709,38,31,0,1
+401868160,5,2026-10-03 20:00,0,Southern Utah,Big Sky,1-4,Utah Tech,Big Sky,0-5,34.3,22.7,0.235,46,33,0,1
+401868086,5,2026-10-03 22:30,0,Eastern Wash.,Big Sky,1-4,UC Davis,Big Sky,3-2,29.7,31.9,0.553,38,49,0,1

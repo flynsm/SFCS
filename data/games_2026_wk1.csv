@@ -1,0 +1,158 @@
+contest_id,week,kickoff_et,neutral,away,away_conf,away_record,home,home_conf,home_record,proj_away,proj_home,home_win_prob,away_score,home_score,has_preview,has_box_score
+401866532,1,2026-08-27 18:00,0,Maine,Coastal Athletic,0-0,Towson,Coastal Athletic,0-0,22.6,27.7,0.626,21,18,0,1
+401866615,1,2026-08-27 18:00,0,Stony Brook,Coastal Athletic,0-0,Delaware St.,MEAC,0-0,33.4,19.7,0.197,34,41,0,1
+401867894,1,2026-08-27 18:00,0,Mercyhurst,NEC,0-0,Youngstown St.,MVFC,0-0,18.8,39.1,0.898,10,43,0,1
+401896383,1,2026-08-27 18:00,0,Ohio Dominican,Great Midwest Athletic,,Morehead St.,Pioneer,0-0,,,,42,40,0,0
+401866614,1,2026-08-27 19:00,0,Glenville State,Mountain East,,Elon,Coastal Athletic,0-0,,,,7,42,0,0
+401867865,1,2026-08-27 19:00,0,Eastern Ill.,OVC,0-0,Murray St.,MVFC,0-0,26.5,26.9,0.511,28,14,0,1
+401868060,1,2026-08-27 19:00,0,Gardner-Webb,OVC,0-0,Austin Peay,UAC,0-0,21.4,36.4,0.826,17,35,0,1
+401868169,1,2026-08-27 19:00,0,Charleston So.,OVC,0-0,Lindenwood,OVC,0-0,21.3,26.8,0.634,17,20,0,1
+401868204,1,2026-08-27 19:00,0,Northwestern (IA),,,Western Ill.,OVC,0-0,,,,14,65,0,0
+401868240,1,2026-08-27 19:00,0,Chattanooga,Southern,0-0,West Ga.,UAC,0-0,24.2,24.3,0.503,24,10,0,1
+401868273,1,2026-08-27 19:00,0,UVA Wise,South Atlantic,,Presbyterian,Pioneer,0-0,,,,37,47,0,0
+401868279,1,2026-08-27 19:00,0,Winona State,Northern Sun,,St. Thomas (MN),Pioneer,0-0,,,,9,15,0,0
+401868315,1,2026-08-27 19:00,0,Houston Christian,Southland,0-0,Southeastern La.,Southland,0-0,12.1,38.2,0.949,34,28,0,1
+401868373,1,2026-08-27 19:00,0,Anderson (SC),South Atlantic,,Furman,Southern,0-0,,,,3,20,0,0
+401868962,1,2026-08-27 19:00,0,Mississippi Val.,SWAC,0-0,Nicholls,Southland,0-0,9.5,39.3,0.969,10,44,0,1
+401874035,1,2026-08-27 19:00,0,Southern Ill.,MVFC,0-0,West Florida,UAC,0-0,33.8,19.2,0.181,31,34,0,1
+401896384,1,2026-08-27 19:00,0,Concord,Mountain East,,Davidson,Pioneer,0-0,,,,41,35,0,0
+401868070,1,2026-08-27 19:30,0,Central Ark.,UAC,0-0,UT Martin,OVC,0-0,24.8,29.3,0.612,36,24,0,1
+401868254,1,2026-08-27 19:30,0,South Dakota Mines,Rocky Mountain,,Drake,Pioneer,0-0,,,,38,35,0,0
+401867874,1,2026-08-27 20:00,0,LIU,NEC,0-0,North Dakota,MVFC,0-0,10.1,37.3,0.955,21,42,0,1
+401869128,1,2026-08-27 20:00,0,La. Christian,,,Northwestern St.,Southland,0-0,,,,42,37,0,0
+401866617,1,2026-08-28 18:00,0,Rhode Island,Coastal Athletic,0-0,Merrimack,FCS Independents,0-0,28.5,19.5,0.287,34,7,0,1
+401868007,1,2026-08-28 18:00,0,Colgate,Patriot,0-0,Fordham,Patriot,0-0,27.0,27.5,0.511,24,14,0,1
+401868040,1,2026-08-28 18:00,0,William & Mary,Patriot,0-0,Villanova,Patriot,0-0,19.7,30.3,0.746,35,32,0,1
+401868261,1,2026-08-28 18:00,0,Marist,Pioneer,0-0,New Haven,NEC,0-0,19.8,32.1,0.778,21,22,0,1
+401866616,1,2026-08-28 19:00,0,New Hampshire,Coastal Athletic,0-0,UAlbany,Coastal Athletic,0-0,28.2,19.9,0.303,14,28,0,1
+401868129,1,2026-08-28 21:00,0,Weber St.,Big Sky,0-0,Northern Colo.,Big Sky,0-0,30.9,19.7,0.242,30,29,0,1
+401868073,1,2026-08-28 22:00,0,Idaho,Big Sky,0-0,Cal Poly,Big Sky,0-0,32.1,21.5,0.254,34,38,0,1
+401867916,1,2026-08-29 12:00,0,Robert Morris,NEC,0-0,Wagner,NEC,0-0,20.8,21.7,0.523,28,7,0,1
+401868792,1,2026-08-29 12:00,0,Fairmont State,Mountain East,,Dayton,Pioneer,0-0,,,,20,43,0,0
+401868209,1,2026-08-29 13:00,0,Georgetown (KY),,,Butler,Pioneer,0-0,,,,23,27,0,0
+401869156,1,2026-08-29 13:00,0,Roosevelt,GLIAC,,Chicago State,FCS Independents,0-0,,,,44,28,0,0
+401867882,1,2026-08-29 14:00,0,Central Conn. St.,NEC,0-0,South Dakota,MVFC,0-0,14.2,37.7,0.929,20,59,0,1
+401868288,1,2026-08-29 14:00,0,Lawrence Tech,,,Valparaiso,Pioneer,0-0,,,,13,59,0,0
+401868154,1,2026-08-29 15:00,0,UC Davis,Big Sky,0-0,Portland St.,Big Sky,0-0,36.3,25.4,0.248,31,24,0,1
+401868324,1,2026-08-29 15:00,1,Southern U.,SWAC,0-0,Alabama St.,SWAC,0-0,20.7,28.6,0.689,17,30,0,1
+401868022,1,2026-08-29 15:30,0,Lehigh,Patriot,0-0,Holy Cross,Patriot,0-0,22.0,26.3,0.606,35,10,0,1
+401868084,1,2026-08-29 17:00,0,Eastern Wash.,Big Sky,0-0,Northern Ariz.,Big Sky,0-0,28.0,31.8,0.593,27,34,0,1
+401866620,1,2026-08-29 17:30,0,Campbell,Coastal Athletic,0-0,ETSU,Southern,0-0,23.8,32.8,0.713,49,37,0,1
+401866613,1,2026-08-29 18:00,0,Virginia-Lynchburg,,,Hampton,Coastal Athletic,0-0,,,,0,45,0,0
+401866618,1,2026-08-29 18:00,0,Morgan St.,MEAC,0-0,N.C. A&T,Coastal Athletic,0-0,21.0,27.0,0.645,17,7,0,1
+401866619,1,2026-08-29 18:00,0,Bryant,Coastal Athletic,0-0,Stonehill,NEC,0-0,26.9,22.2,0.383,24,6,0,1
+401867855,1,2026-08-29 18:00,0,Southeast Mo. St.,OVC,0-0,Indiana St.,MVFC,0-0,28.7,24.5,0.398,23,21,0,1
+401867972,1,2026-08-29 18:00,0,Winston-Salem,CIAA,,Norfolk St.,MEAC,0-0,,,,0,56,0,0
+401867982,1,2026-08-29 18:00,0,Savannah St.,SIAC,,South Carolina St.,MEAC,0-0,,,,0,87,0,0
+401867988,1,2026-08-29 18:00,0,Bucknell,Patriot,0-0,Richmond,Patriot,0-0,16.5,35.3,0.88,14,35,0,1
+401868101,1,2026-08-29 18:00,0,VMI,Southern,0-0,Idaho St.,Big Sky,0-0,16.1,40.1,0.932,10,38,0,1
+401868394,1,2026-08-29 18:00,0,The Citadel,Southern,0-0,Wofford,Southern,0-0,15.6,25.2,0.727,14,42,0,1
+401866621,1,2026-08-29 19:00,0,Monmouth,Coastal Athletic,0-0,Tennessee Tech,Southern,0-0,31.3,28.8,0.44,14,38,0,1
+401867977,1,2026-08-29 19:00,0,N.C. Central,MEAC,0-0,Texas Southern,SWAC,0-0,32.7,21.6,0.243,30,42,0,1
+401868049,1,2026-08-29 19:00,0,Abilene Christian,UAC,0-0,Lamar University,Southland,0-0,28.3,22.3,0.356,14,21,0,1
+401868139,1,2026-08-29 19:00,0,Eastern Ky.,UAC,0-0,Western Caro.,Southern,0-0,29.8,30.0,0.504,21,45,0,1
+401868149,1,2026-08-29 19:00,1,Samford,Southern,0-0,North Ala.,UAC,0-0,29.4,27.8,0.458,10,22,0,1
+401868305,1,2026-08-29 19:00,0,SFA,Southland,0-0,McNeese,Southland,0-0,30.5,21.4,0.284,38,27,0,1
+401868934,1,2026-08-29 19:00,1,Morehouse,SIAC,,Ark.-Pine Bluff,SWAC,0-0,,,,15,35,0,0
+401868948,1,2026-08-29 19:00,0,Albany St. (GA),SIAC,,Florida A&M,SWAC,0-0,,,,7,20,0,0
+401868952,1,2026-08-29 19:00,0,Clark Atlanta,SIAC,,Grambling,SWAC,0-0,,,,7,49,0,0
+401872615,1,2026-08-29 19:00,0,Stetson,Pioneer,0-0,South Dakota St.,MVFC,0-0,-3.2,56.2,1.0,7,70,0,1
+401874042,1,2026-08-29 19:00,0,East Texas A&M,Southland,0-0,Mercer,Southern,0-0,18.6,37.2,0.878,15,23,0,1
+401891332,1,2026-08-29 19:00,0,St. Francis (IL),,,Illinois St.,MVFC,0-0,,,,0,76,0,0
+401896385,1,2026-08-29 19:00,0,Miles,SIAC,,Alcorn,SWAC,0-0,,,,7,56,0,0
+401913104,1,2026-08-29 19:00,0,Oklahoma Panhandle,,,UIW,Southland,0-0,,,,14,76,0,0
+401867935,1,2026-08-29 19:30,1,Alabama A&M,SWAC,0-0,Howard,MEAC,0-0,23.7,29.1,0.632,24,31,0,1
+401868245,1,2026-08-29 20:00,0,UT Permian Basin,Lone Star,,UTRGV,Southland,0-0,,,,0,44,0,0
+401868194,1,2026-08-29 20:30,0,Jackson St.,SWAC,0-0,Tennessee St.,OVC,0-0,25.3,21.1,0.396,26,24,0,1
+401868110,1,2026-08-29 21:00,0,Southern Utah,Big Sky,0-0,Montana,Big Sky,0-0,21.8,38.0,0.844,21,28,0,1
+401868235,1,2026-08-29 21:00,0,Prairie View,SWAC,0-0,Tarleton St.,UAC,0-0,16.4,38.9,0.92,30,49,0,1
+401868118,1,2026-08-29 22:00,0,Montana St.,Big Sky,0-0,Utah Tech,Big Sky,0-0,40.8,14.3,0.049,54,0,0,1
+401868269,1,2026-09-03 18:00,0,Ky. Christian,,,Morehead St.,Pioneer,0-1,,,,24,75,0,0
+401856767,1,2026-09-03 19:00,0,Bethune-Cookman,SWAC,0-0,UCF,Big 12,,4.0,51.6,0.998,6,73,0,1
+401864424,1,2026-09-03 19:00,0,Merrimack,FCS Independents,0-1,Delaware,Conference USA,,13.0,37.5,0.937,7,42,0,1
+401864425,1,2026-09-03 19:00,0,West Ga.,UAC,0-1,Kennesaw St.,Conference USA,,17.0,30.9,0.807,0,47,0,1
+401866409,1,2026-09-03 19:00,0,UAlbany,Coastal Athletic,1-0,Buffalo,Mid-American,,13.2,36.2,0.924,17,21,0,1
+401866622,1,2026-09-03 19:00,0,Lindenwood,OVC,1-0,Stony Brook,Coastal Athletic,0-1,23.7,29.6,0.645,32,36,0,1
+401867889,1,2026-09-03 19:00,0,Southern Ill.,MVFC,0-1,Samford,Southern,0-1,34.6,20.9,0.198,22,18,0,1
+401856663,1,2026-09-03 20:00,0,Ark.-Pine Bluff,SWAC,1-0,Missouri,SEC,,-4.4,58.0,1.0,14,54,0,1
+401858422,1,2026-09-03 20:00,0,Eastern Ill.,OVC,1-0,Minnesota,Big Ten,,4.2,41.8,0.991,7,59,0,1
+401856768,1,2026-09-03 21:00,0,Idaho,Big Sky,0-1,Utah,Big 12,,9.4,42.9,0.982,14,66,0,1
+401858435,1,2026-09-04 19:00,0,Indiana St.,MVFC,0-1,Purdue,Big Ten,,10.3,42.9,0.979,19,44,0,1
+401866623,1,2026-09-04 19:00,0,N.C. A&T,Coastal Athletic,0-1,Georgia St.,Sun Belt,,16.0,39.6,0.929,10,59,0,1
+401868262,1,2026-09-04 19:00,0,Franklin Pierce,Northeast 10,,Marist,Pioneer,0-1,,,,18,27,0,0
+401856769,1,2026-09-04 20:00,0,LIU,NEC,0-1,Kansas,Big 12,,6.1,44.4,0.991,6,51,0,1
+401868284,1,2026-09-05 11:00,0,Webber Int'l,,,Stetson,Pioneer,0-1,,,,10,45,0,0
+401858208,1,2026-09-05 12:00,0,New Hampshire,Coastal Athletic,0-1,Syracuse,ACC,,15.3,35.8,0.899,3,66,0,1
+401861962,1,2026-09-05 12:00,0,Lafayette,Patriot,0-0,UConn,FBS Independents,,18.1,37.2,0.884,7,56,0,1
+401862701,1,2026-09-05 12:00,0,Bryant,Coastal Athletic,1-0,Army West Point,American Athletic,,7.6,40.8,0.981,3,59,0,1
+401866410,1,2026-09-05 12:00,0,Tarleton St.,UAC,1-0,Bowling Green,Mid-American,,23.3,29.9,0.659,20,13,0,1
+401867924,1,2026-09-05 12:00,0,Stonehill,NEC,0-1,New Haven,NEC,1-0,22.0,29.7,0.684,21,3,0,1
+401867928,1,2026-09-05 12:00,0,Southern Conn. St.,Northeast 10,,Wagner,NEC,0-1,,,,7,31,0,0
+401868017,1,2026-09-05 12:30,0,Lehigh,Patriot,1-0,Georgetown,Patriot,0-0,30.4,16.7,0.196,45,14,0,1
+401856659,1,2026-09-05 13:00,0,Youngstown St.,MVFC,1-0,Kentucky,SEC,,14.9,40.6,0.946,13,45,0,1
+401856779,1,2026-09-05 13:00,0,Southeast Mo. St.,OVC,1-0,Iowa St.,Big 12,,7.8,43.9,0.988,10,38,0,1
+401864496,1,2026-09-05 13:00,0,Duquesne,NEC,0-0,Air Force,Mountain West,,11.5,42.4,0.973,0,34,0,1
+401868000,1,2026-09-05 13:00,0,Holy Cross,Patriot,0-1,Colgate,Patriot,1-0,29.6,23.2,0.345,10,35,0,1
+401868186,1,2026-09-05 13:30,0,Gardner-Webb,OVC,0-1,Wofford,Southern,1-0,20.3,27.3,0.667,13,17,0,1
+401862698,1,2026-09-05 14:00,0,Rhode Island,Coastal Athletic,1-0,Temple,American Athletic,,19.6,33.3,0.804,14,38,0,1
+401866624,1,2026-09-05 14:00,0,Sacred Heart,Coastal Athletic,0-0,Monmouth,Coastal Athletic,0-1,21.2,39.4,0.873,24,31,0,1
+401856658,1,2026-09-05 15:00,0,Tennessee St.,OVC,0-1,Georgia,SEC,,-6.0,52.3,1.0,3,63,0,1
+401868111,1,2026-09-05 15:00,0,Drake,Pioneer,0-1,Montana,Big Sky,1-0,11.9,39.7,0.959,10,45,0,1
+401856666,1,2026-09-05 15:30,0,Furman,Southern,1-0,Tennessee,SEC,,5.3,50.8,0.998,9,56,0,1
+401862694,1,2026-09-05 15:30,0,The Citadel,Southern,0-1,Charlotte,American Athletic,,14.7,33.0,0.872,43,41,0,1
+401862696,1,2026-09-05 15:30,0,Towson,Coastal Athletic,0-1,Navy,American Athletic,,13.7,37.2,0.929,15,42,0,1
+401862700,1,2026-09-05 15:30,0,UTRGV,Southland,1-0,UTSA,American Athletic,,17.1,41.2,0.934,16,45,0,1
+401864499,1,2026-09-05 15:30,0,Fordham,Patriot,0-1,North Dakota St.,Mountain West,,7.8,45.9,0.991,0,38,0,1
+401866627,1,2026-09-05 15:30,0,Maine,Coastal Athletic,1-0,App State,Sun Belt,,15.3,37.9,0.921,3,55,0,1
+401867875,1,2026-09-05 16:00,0,St. Thomas (MN),Pioneer,1-0,North Dakota,MVFC,1-0,13.9,36.3,0.919,26,62,0,1
+401856635,1,2026-09-05 16:15,0,North Ala.,UAC,1-0,Arkansas,SEC,,9.8,50.8,0.995,14,31,0,1
+401868356,1,2026-09-05 17:00,0,Alcorn,SWAC,1-0,Southern Miss.,Sun Belt,,11.0,37.6,0.951,3,49,0,1
+401868345,1,2026-09-05 17:30,0,Tusculum,South Atlantic,,ETSU,Southern,0-1,,,,14,48,0,0
+401866626,1,2026-09-05 18:00,0,Elon,Coastal Athletic,1-0,Davidson,Pioneer,0-1,41.3,15.7,0.055,38,0,0,1
+401867692,1,2026-09-05 18:00,0,Delaware St.,MEAC,1-0,William & Mary,Patriot,1-0,15.0,39.1,0.934,15,22,0,1
+401867917,1,2026-09-05 18:00,0,West Virginia St.,Mountain East,,Robert Morris,NEC,1-0,,,,9,29,0,0
+401867973,1,2026-09-05 18:00,0,Norfolk St.,MEAC,1-0,Old Dominion,Sun Belt,,5.6,47.0,0.995,10,31,0,1
+401867978,1,2026-09-05 18:00,0,Elizabeth City State,CIAA,,N.C. Central,MEAC,0-1,,,,6,27,0,0
+401867989,1,2026-09-05 18:00,0,Villanova,Patriot,0-1,Bucknell,Patriot,0-1,37.5,15.0,0.08,17,16,0,1
+401868274,1,2026-09-05 18:00,0,Presbyterian,Pioneer,1-0,Mercer,Southern,1-0,13.7,39.4,0.946,3,62,0,1
+401868325,1,2026-09-05 18:00,0,Lane,SIAC,,Alabama St.,SWAC,1-0,,,,0,34,0,0
+401868336,1,2026-09-05 18:00,0,Tennessee Tech,Southern,1-0,Chattanooga,Southern,1-0,22.2,27.1,0.62,24,9,0,1
+401869127,1,2026-09-05 18:00,0,Richmond,Patriot,1-0,Howard,MEAC,1-0,29.9,15.9,0.191,28,21,0,1
+401856669,1,2026-09-05 19:00,0,Austin Peay,UAC,1-0,Vanderbilt,SEC,,15.3,42.4,0.954,9,28,0,1
+401856770,1,2026-09-05 19:00,0,Abilene Christian,UAC,0-1,Texas Tech,Big 12,,10.6,47.4,0.989,10,33,0,1
+401856771,1,2026-09-05 19:00,0,Nicholls,Southland,1-0,Kansas St.,Big 12,,4.0,45.6,0.995,3,71,0,1
+401860880,1,2026-09-05 19:00,0,Idaho St.,Big Sky,1-0,Utah St.,Pac-12,,20.4,44.6,0.934,29,17,0,1
+401862697,1,2026-09-05 19:00,0,Houston Christian,Southland,1-0,Rice,American Athletic,,9.7,38.5,0.964,3,31,0,1
+401867684,1,2026-09-05 19:00,0,Chicago State,FCS Independents,0-1,UT Martin,OVC,0-1,19.7,30.0,0.741,7,42,0,1
+401867866,1,2026-09-05 19:00,0,Murray St.,MVFC,0-1,Middle Tenn.,Conference USA,,16.7,40.9,0.935,14,38,0,1
+401868071,1,2026-09-05 19:00,0,West Florida,UAC,1-0,Central Ark.,UAC,1-0,21.6,32.5,0.752,42,14,0,1
+401868085,1,2026-09-05 19:00,0,UNI,MVFC,0-0,Eastern Wash.,Big Sky,0-1,26.5,29.1,0.566,24,34,0,1
+401868140,1,2026-09-05 19:00,0,Eastern Ky.,UAC,0-1,Jacksonville St.,Conference USA,,16.0,35.8,0.892,7,49,0,1
+401868170,1,2026-09-05 19:00,0,Charleston So.,OVC,0-1,Ga. Southern,Sun Belt,,12.9,38.3,0.943,0,31,0,1
+401868297,1,2026-09-05 19:00,0,Miles,SIAC,,Alabama A&M,SWAC,0-1,,,,23,38,0,0
+401868316,1,2026-09-05 19:00,0,Southeastern La.,Southland,0-1,South Alabama,Sun Belt,,19.1,34.0,0.824,14,39,0,1
+401868953,1,2026-09-05 19:00,0,Central St. (OH),SIAC,,Grambling,SWAC,1-0,,,,26,48,0,0
+401868958,1,2026-09-05 19:00,0,Edward Waters,SIAC,,Jackson St.,SWAC,1-0,,,,14,66,0,0
+401868970,1,2026-09-05 19:00,0,Kentucky St.,SIAC,,Southern U.,SWAC,0-1,,,,15,34,0,0
+401869136,1,2026-09-05 19:00,0,Texas Wesleyan,,,McNeese,Southland,0-1,,,,0,52,0,0
+401858211,1,2026-09-05 19:30,0,VMI,Southern,0-1,Virginia Tech,ACC,,2.2,48.1,0.998,3,73,0,1
+401869129,1,2026-09-05 19:30,0,Northwestern St.,Southland,0-1,Louisiana Tech,Sun Belt,,6.6,45.0,0.992,6,80,0,1
+401856775,1,2026-09-05 20:00,0,Utah Tech,Big Sky,0-1,BYU,Big 12,,3.6,46.5,0.996,7,63,0,1
+401858427,1,2026-09-05 20:00,0,Hampton,Coastal Athletic,1-0,Maryland,Big Ten,,5.0,48.7,0.997,0,62,0,1
+401858431,1,2026-09-05 20:00,0,South Dakota St.,MVFC,1-0,Northwestern,Big Ten,,18.9,25.6,0.662,18,34,0,1
+401867845,1,2026-09-05 20:00,0,Illinois St.,MVFC,1-0,Western Ill.,OVC,1-0,37.7,19.9,0.133,41,10,0,1
+401867883,1,2026-09-05 20:00,0,South Dakota,MVFC,1-0,Northern Colo.,Big Sky,0-1,34.2,15.5,0.122,38,23,0,1
+401868074,1,2026-09-05 20:00,0,Central Wash.,Lone Star,,Cal Poly,Big Sky,1-0,,,,17,24,0,0
+401868158,1,2026-09-05 20:00,0,Weber St.,Big Sky,1-0,Southern Utah,Big Sky,0-1,27.9,28.7,0.518,42,47,0,1
+401868306,1,2026-09-05 20:00,0,East Texas A&M,Southland,0-1,SFA,Southland,1-0,16.7,37.8,0.906,7,44,0,1
+401869142,1,2026-09-05 20:00,0,Lamar University,Southland,1-0,Louisiana,Sun Belt,,11.4,36.9,0.945,7,38,0,1
+401868119,1,2026-09-05 20:30,0,Butler,Pioneer,1-0,Montana St.,Big Sky,1-0,9.3,45.8,0.989,24,51,0,1
+401870790,1,2026-09-05 21:00,0,Mercyhurst,NEC,0-1,New Mexico St.,Conference USA,,13.2,37.8,0.937,14,51,0,1
+401856773,1,2026-09-05 21:30,0,Northern Ariz.,Big Sky,1-0,Arizona,Big 12,,13.7,41.1,0.956,7,35,0,1
+401860879,1,2026-09-05 21:30,0,Portland St.,Big Sky,0-1,San Diego St.,Pac-12,,11.7,40.5,0.964,20,53,0,1
+401856774,1,2026-09-05 22:00,0,Morgan St.,MEAC,1-0,Arizona St.,Big 12,,1.9,45.3,0.997,7,70,0,1
+401866411,1,2026-09-05 22:00,0,Mississippi Val.,SWAC,0-1,Sacramento St.,Mid-American,,4.5,51.9,0.998,0,52,0,1
+401868163,1,2026-09-05 22:00,0,UC Davis,Big Sky,1-0,San Diego,Pioneer,0-0,34.4,20.5,0.193,49,17,0,1
+401917058,1,2026-09-06 11:00,0,Western Caro.,Southern,1-0,Campbell,Coastal Athletic,1-0,34.7,30.1,0.387,19,28,0,1
+401868967,1,2026-09-06 12:00,0,Texas Southern,SWAC,1-0,Prairie View,SWAC,0-1,19.1,32.2,0.793,14,52,0,1
+401867939,1,2026-09-06 15:00,1,South Carolina St.,MEAC,1-0,Florida A&M,SWAC,1-0,29.7,23.6,0.351,31,13,0,1

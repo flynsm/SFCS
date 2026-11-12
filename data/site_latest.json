@@ -3,6 +3,11 @@
   "week": 11,
   "played_week": 10,
   "games_weeks": [
+    1,
+    2,
+    3,
+    4,
+    5,
     6,
     7,
     8,
@@ -28,5 +33,5 @@
     "title_odds_swac",
     "title_odds_uac"
   ],
-  "updated": "2026-11-09T18:26:31Z"
+  "updated": "2026-11-12T19:19:15Z"
 }
