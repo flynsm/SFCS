@@ -2,123 +2,78 @@
   "_instructions": "One entry per term; the page sorts them alphabetically. Fill in 'definition'. 'thresholds' is optional (how cutoffs or thresholds were chosen); leave it empty to hide it. A term with an empty definition shows 'Coming soon.' Add or remove terms freely.",
   "terms": [
     {
-      "term": "Biggest Improvers",
-      "definition": "",
+      "term": "Power rating",
+      "definition": "Team strength in points against relative to average D1 team",
       "thresholds": ""
     },
     {
-      "term": "Defensive Stuff Rate",
-      "definition": "",
+      "term": "Offense/Defense rating",
+      "definition": "Opponent and pace-adjusted points gained/allowed per 12 possessions.",
       "thresholds": ""
     },
     {
-      "term": "Early Down Success Rate",
-      "definition": "",
+      "term": "Postgame win expectancy (PGWE)",
+      "definition": "Probability of winning given both teams’ game stats, independent of the score.",
       "thresholds": ""
     },
     {
-      "term": "EPA per Play",
-      "definition": "",
+      "term": "EPA",
+      "definition": "Expected points added by a play based on change in down, field position, and game time.",
       "thresholds": ""
     },
     {
-      "term": "Expected Wins",
-      "definition": "",
+      "term": "Success rate",
+      "definition": "the share of plays gaining set fractions of yards remaining for a first down: 50% of the distance on 1st down, 70% on 2nd, converting on 3rd or 4th.",
       "thresholds": ""
     },
     {
-      "term": "Explosive Play Rate",
-      "definition": "",
+      "term": "Explosive play",
+      "definition": "Run of 10+ yards or pass of 16+ yards – the top ~15% of each play type.",
       "thresholds": ""
     },
     {
-      "term": "Garbage Time",
-      "definition": "",
+      "term": "Line yards",
+      "definition": "Rush yards credited to the offensive line. Negative yards count at 120%, the first 4 yards of a run at 100%, yards 5–10 at 50%.",
       "thresholds": ""
     },
     {
-      "term": "Havoc Rate",
-      "definition": "",
+      "term": "Stuff rate",
+      "definition": "Share of runs stopped for no gain or a loss.",
       "thresholds": ""
     },
     {
-      "term": "Late Down Success Rate",
-      "definition": "",
+      "term": "Havoc rate",
+      "definition": "Share of plays ending in a sack, tackle for loss, pass breakup, interception or fumble.",
       "thresholds": ""
     },
     {
-      "term": "Line Yards",
-      "definition": "",
+      "term": "Quality drive",
+      "definition": "Drive with a first down at or inside the opponent’s 40 yard line.",
       "thresholds": ""
     },
     {
-      "term": "Offense / Defense Ratings",
-      "definition": "",
+      "term": "Finishing drives",
+      "definition": "Points per quality drive.",
       "thresholds": ""
     },
     {
-      "term": "Passing Success Rate",
-      "definition": "",
+      "term": "Eckel rate",
+      "definition": "Share of drives that are quality drives or end in a touchdown by the offense.",
       "thresholds": ""
     },
     {
-      "term": "Percentile Shading",
-      "definition": "",
+      "term": "And-goal average",
+      "definition": "Average points scored from goal-to-go situations.",
       "thresholds": ""
     },
     {
-      "term": "Points per Game Above",
-      "definition": "",
+      "term": "Penalty EPA",
+      "definition": "EPA lost to penalties, determined by resulting change in field positions. Note: this does not account for plays “called back” due to fouls during the play (e.g., holds, illegal blocks), as play by play data are insufficient to determine whether the foul contributed to the yards gained.",
       "thresholds": ""
     },
     {
-      "term": "Postgame Win Expectancy",
-      "definition": "",
-      "thresholds": ""
-    },
-    {
-      "term": "Power Rating",
-      "definition": "",
-      "thresholds": ""
-    },
-    {
-      "term": "Projected Score",
-      "definition": "",
-      "thresholds": ""
-    },
-    {
-      "term": "Pts/Quality Drive",
-      "definition": "",
-      "thresholds": ""
-    },
-    {
-      "term": "Quality Drive Rate",
-      "definition": "",
-      "thresholds": ""
-    },
-    {
-      "term": "Resume Rating",
-      "definition": "",
-      "thresholds": ""
-    },
-    {
-      "term": "Rushing Success Rate",
-      "definition": "",
-      "thresholds": ""
-    },
-    {
-      "term": "Title Odds",
-      "definition": "",
-      "thresholds": ""
-    },
-    {
-      "term": "Win Probability",
-      "definition": "",
-      "thresholds": ""
-    },
-    {
-      "term": "Yards per Play",
-      "definition": "",
+      "term": "Punt/return vs expected",
+      "definition": "Punt/return yards compared with what is typical from the spot of the punt.",
       "thresholds": ""
     }
   ]
